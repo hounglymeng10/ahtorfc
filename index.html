@@ -7,6 +7,12 @@
 <link rel="icon" type="image/png" href="LOGO2.png">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+  @font-face {
+  font-family: 'MiSans Khmer';
+  src: url('MiSansKhmer-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
   :root {
     --green:    #1B6B2F;
     --green2:   #2E8B57;
@@ -32,6 +38,13 @@
   }
 
   /* ── NAV ── */
+  body {
+  font-family: 'MiSans Khmer', 'Barlow', sans-serif;
+  background: var(--dark);
+  color: var(--white);
+  overflow-x: hidden;
+}
+```
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     background: rgba(14,26,16,0.95);
