@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AHTOR FC — អាទរ | Official Website</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green:    #1B6B2F;
+    --green2:   #2E8B57;
+    --green3:   #0d4a1f;
+    --yellow:   #F4C430;
+    --gold:     #D4A017;
+    --white:    #FFFFFF;
+    --offwhite: #F5F9F6;
+    --dark:     #0e1a10;
+    --gray:     #4a5e4d;
+    --lightg:   #e8f5e9;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--dark);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(14,26,16,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--green);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px; letter-spacing: 3px;
+    color: var(--white);
+  }
+  .nav-logo span { color: var(--yellow); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: #aaccb0; text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--yellow); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background:
+      linear-gradient(160deg, rgba(14,26,16,0.85) 0%, rgba(27,107,47,0.4) 50%, rgba(14,26,16,0.95) 100%),
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 40px,
+        rgba(27,107,47,0.06) 40px,
+        rgba(27,107,47,0.06) 80px
+      );
+    background-color: var(--green3);
+    display: flex; align-items: center;
+    padding: 100px 48px 60px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; right: -100px; top: 50%;
+    transform: translateY(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(27,107,47,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--dark);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 800; letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px; border-radius: 2px;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 12vw, 130px);
+    line-height: 0.9; letter-spacing: 4px;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .hero h1 span { color: var(--yellow); }
+  .hero-khmer {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 36px; font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 6px;
+    margin-bottom: 28px;
+  }
+  .hero p {
+    font-size: 16px; font-weight: 300; line-height: 1.7;
+    color: rgba(255,255,255,0.7); max-width: 480px;
+    margin-bottom: 40px;
+  }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--yellow); color: var(--dark);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 800; letter-spacing: 2px;
+    text-transform: uppercase; border: none; cursor: pointer;
+    padding: 14px 32px; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; cursor: pointer;
+    padding: 13px 32px; text-decoration: none;
+    border: 2px solid rgba(255,255,255,0.3);
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--yellow); color: var(--yellow); }
+
+  .hero-stats {
+    position: absolute; bottom: 48px; right: 48px;
+    display: flex; gap: 40px;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat .num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px; color: var(--yellow); line-height: 1;
+  }
+  .hero-stat .lbl {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+  }
+
+  /* ── TICKER ── */
+  .ticker {
+    background: var(--yellow); color: var(--dark);
+    overflow: hidden; padding: 10px 0;
+  }
+  .ticker-inner {
+    display: flex; gap: 60px;
+    animation: ticker 25s linear infinite;
+    white-space: nowrap;
+  }
+  .ticker span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; font-weight: 800; letter-spacing: 3px;
+    text-transform: uppercase; flex-shrink: 0;
+  }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 48px; }
+
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 800; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--yellow);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 6vw, 72px); letter-spacing: 3px;
+    line-height: 1; color: var(--white);
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.5);
+    max-width: 540px; line-height: 1.7; margin-bottom: 56px;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--dark); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+    align-items: center;
+  }
+  .about-left .big-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px; line-height: 0.9; letter-spacing: 2px;
+    color: rgba(255,255,255,0.05);
+    margin-bottom: -40px;
+  }
+  .about-card {
+    background: linear-gradient(135deg, rgba(27,107,47,0.15), rgba(27,107,47,0.05));
+    border: 1px solid rgba(27,107,47,0.3);
+    border-left: 4px solid var(--green);
+    padding: 32px; margin-bottom: 24px;
+  }
+  .about-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px; font-weight: 700; letter-spacing: 1px;
+    color: var(--yellow); margin-bottom: 10px;
+  }
+  .about-card p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.65); }
+
+  .about-right {
+    background: linear-gradient(160deg, var(--green3), rgba(14,26,16,0.8));
+    border: 1px solid rgba(27,107,47,0.2);
+    padding: 48px; position: relative;
+  }
+  .club-info-row {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .club-info-row:last-child { border-bottom: none; }
+  .ci-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.35);
+  }
+  .ci-value {
+    font-size: 13px; font-weight: 500; color: var(--white);
+    text-align: right; max-width: 240px;
+  }
+  .ci-value a { color: var(--yellow); text-decoration: none; }
+
+  /* ── PLAYERS ── */
+  #players { background: #0a1510; }
+  .players-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px; margin-top: 48px;
+  }
+  .player-card {
+    background: linear-gradient(160deg, rgba(27,107,47,0.12), rgba(14,26,16,0.8));
+    border: 1px solid rgba(27,107,47,0.2);
+    padding: 20px 16px;
+    transition: transform 0.2s, border-color 0.2s, background 0.2s;
+    cursor: pointer; position: relative; overflow: hidden;
+  }
+  .player-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--green); transition: background 0.2s;
+  }
+  .player-card:hover { transform: translateY(-4px); border-color: var(--yellow); }
+  .player-card:hover::before { background: var(--yellow); }
+  .pc-no {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px; line-height: 1; color: rgba(27,107,47,0.4);
+    margin-bottom: 8px;
+  }
+  .pc-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; font-weight: 700; letter-spacing: 0.5px;
+    color: var(--white); margin-bottom: 4px;
+  }
+  .pc-khmer { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 10px; }
+  .pc-badge {
+    display: inline-block;
+    background: rgba(27,107,47,0.3);
+    color: var(--yellow);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 3px 8px;
+  }
+
+  /* ── SPONSOR ── */
+  #sponsor { background: var(--dark); }
+  .sponsor-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    margin-top: 48px;
+  }
+  .sponsor-tier {
+    border: 1px solid; padding: 0; overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .sponsor-tier:hover { transform: translateY(-4px); }
+  .tier-gold { border-color: var(--gold); }
+  .tier-silver { border-color: #999; }
+  .tier-bronze { border-color: #8B4513; }
+
+  .tier-header {
+    padding: 28px 24px; text-align: center;
+  }
+  .tier-gold .tier-header { background: linear-gradient(135deg, #8B6914, var(--gold)); }
+  .tier-silver .tier-header { background: linear-gradient(135deg, #555, #aaa); }
+  .tier-bronze .tier-header { background: linear-gradient(135deg, #5a2d0c, #8B4513); }
+
+  .tier-icon { font-size: 36px; margin-bottom: 8px; }
+  .tier-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px; letter-spacing: 3px; color: var(--white);
+  }
+  .tier-price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 32px; font-weight: 800; color: var(--white);
+    margin-top: 8px;
+  }
+  .tier-price span { font-size: 14px; font-weight: 400; opacity: 0.7; }
+  .tier-body { padding: 28px 24px; background: rgba(255,255,255,0.03); }
+  .tier-feature {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.4;
+  }
+  .tier-feature:last-child { border-bottom: none; }
+  .tier-feature::before {
+    content: '✓'; color: var(--yellow); font-weight: 700;
+    flex-shrink: 0; margin-top: 1px;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: linear-gradient(160deg, var(--green3) 0%, var(--dark) 100%);
+  }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+    align-items: start;
+  }
+  .contact-item {
+    display: flex; gap: 20px; align-items: flex-start;
+    padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .contact-icon {
+    width: 44px; height: 44px; background: var(--green);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .contact-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(255,255,255,0.35); margin-bottom: 4px;
+  }
+  .contact-value {
+    font-size: 14px; color: var(--white); font-weight: 500;
+  }
+  .contact-value a { color: var(--yellow); text-decoration: none; }
+
+  .contact-right {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(27,107,47,0.25);
+    padding: 40px;
+  }
+  .contact-right h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px; letter-spacing: 2px; color: var(--yellow);
+    margin-bottom: 20px;
+  }
+  .quote-block {
+    border-left: 4px solid var(--yellow);
+    padding: 20px 24px; margin-top: 24px;
+    background: rgba(244,196,48,0.05);
+  }
+  .quote-block p {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px; font-weight: 600; font-style: italic;
+    color: var(--white); line-height: 1.4;
+  }
+  .quote-block cite {
+    font-size: 11px; letter-spacing: 2px; color: var(--yellow);
+    text-transform: uppercase; margin-top: 10px; display: block;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #050d07;
+    border-top: 2px solid var(--green);
+    padding: 40px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px; letter-spacing: 3px; color: var(--white);
+  }
+  .footer-logo span { color: var(--yellow); }
+  .footer-copy {
+    font-size: 12px; color: rgba(255,255,255,0.25); letter-spacing: 1px;
+  }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.3);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--yellow); }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    section { padding: 64px 20px; }
+    .hero { padding: 100px 20px 160px; }
+    .hero-stats { right: 20px; gap: 20px; }
+    .about-grid, .contact-grid, .sponsor-grid { grid-template-columns: 1fr; }
+    .players-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AHTOR <span>FC</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#players">Players</a></li>
+    <li><a href="#sponsor">Sponsor</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-badge">⚽ Official Club Website — Season 2026</div>
+    <h1>AHTOR <span>FC</span></h1>
+    <div class="hero-khmer">អាទរ</div>
+    <p>Born in Angkor Chum, raised by passion. We are a community football club from Siem Reap, Cambodia — built by young men who turned their high school dream into a real football family.</p>
+    <div class="hero-btns">
+      <a href="#sponsor" class="btn-primary">Become a Sponsor</a>
+      <a href="#contact" class="btn-outline">Contact Us</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">36</div><div class="lbl">Players</div></div>
+    <div class="hero-stat"><div class="num">2</div><div class="lbl">Groups</div></div>
+    <div class="hero-stat"><div class="num">2026</div><div class="lbl">Season</div></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>⚽ WE ARE AHTOR FC</span><span>🏆 SIEM REAP, CAMBODIA</span>
+    <span>💚 ONE TEAM ONE SPIRIT</span><span>⚽ ANGKOR CHUM DISTRICT</span>
+    <span>🌟 SEASON 2026</span><span>💛 WE ARE AHTOR FC</span>
+    <span>⚽ WE ARE AHTOR FC</span><span>🏆 SIEM REAP, CAMBODIA</span>
+    <span>💚 ONE TEAM ONE SPIRIT</span><span>⚽ ANGKOR CHUM DISTRICT</span>
+    <span>🌟 SEASON 2026</span><span>💛 WE ARE AHTOR FC</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About Us</div>
+  <div class="about-grid">
+    <div class="about-left fade-in">
+      <div class="section-title">OUR<br>STORY</div>
+      <div class="about-card">
+        <h3>🏫 How It Started</h3>
+        <p>AHTOR FC started as a group of high school students in Angkor Chum District who shared one passion — football. We played on dusty pitches, trained without proper kits, but never without spirit.</p>
+      </div>
+      <div class="about-card">
+        <h3>🎓 Where We Are Now</h3>
+        <p>After graduating university, our founding members came back to build something real. Today AHTOR FC is a registered community club with 36 players, a coach, and a vision to grow into Cambodia's most respected grassroots club.</p>
+      </div>
+      <div class="about-card">
+        <h3>🚀 Where We Are Going</h3>
+        <p>We are building a Youth Academy, competing in provincial leagues, and creating opportunities for young players in Siem Reap. By 2030, AHTOR FC will be a professional club — and we are just getting started.</p>
+      </div>
+    </div>
+    <div class="about-right fade-in">
+      <div class="section-label" style="margin-bottom:24px;">Club Information</div>
+      <div class="club-info-row">
+        <div class="ci-label">Club Name</div>
+        <div class="ci-value">AHTOR FC (អាទរ)</div>
+      </div>
+      <div class="club-info-row">
+        <div class="ci-label">Founded</div>
+        <div class="ci-value">Siem Reap High School Era</div>
+      </div>
+      <div class="club-info-row">
+        <div class="ci-label">Head Coach</div>
+        <div class="ci-value">នុប វណ្ណ (Nob Vann)</div>
+      </div>
+      <div class="club-info-row">
+        <div class="ci-label">Location</div>
+        <div class="ci-value">Angkor Chum District, Siem Reap Province</div>
+      </div>
+      <div class="club-info-row">
+        <div class="ci-label">Players</div>
+        <div class="ci-value">36 Registered — Group A & B</div>
+      </div>
+      <div class="club-info-row">
+        <div class="ci-label">Phone</div>
+        <div class="ci-value"><a href="tel:068500601">068 500 601</a></div>
+      </div>
+      <div class="club-info-row">
+        <div class="ci-label">Email</div>
+        <div class="ci-value"><a href="mailto:weareahtor2021@gmail.com">weareahtor2021@gmail.com</a></div>
+      </div>
+      <div class="club-info-row">
+        <div class="ci-label">Website</div>
+        <div class="ci-value"><a href="http://www.weareahtor.com" target="_blank">www.weareahtor.com</a></div>
+      </div>
+      <div class="club-info-row">
+        <div class="ci-label">Telegram</div>
+        <div class="ci-value"><a href="https://t.me/ahtorfootball">@ahtorfootball</a></div>
+      </div>
+      <div class="club-info-row">
+        <div class="ci-label">Club Colors</div>
+        <div class="ci-value" style="display:flex;gap:8px;align-items:center;">
+          <span style="width:20px;height:20px;background:#1B6B2F;display:inline-block;border-radius:50%;"></span>
+          <span style="width:20px;height:20px;background:#F4C430;display:inline-block;border-radius:50%;"></span>
+          Green & Gold
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLAYERS -->
+<section id="players">
+  <div class="section-label">The Squad</div>
+  <div class="section-title">OUR PLAYERS</div>
+  <div class="section-sub">Meet the 36 dedicated players of AHTOR FC — Group A & Group B — all born in Siem Reap, all playing for the same dream.</div>
+
+  <div style="display:flex;gap:12px;margin-bottom:32px;">
+    <div style="background:rgba(27,107,47,0.2);border:1px solid var(--green);padding:8px 20px;font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:2px;color:var(--yellow);">GROUP A — 18 PLAYERS</div>
+    <div style="background:rgba(21,101,192,0.2);border:1px solid #1565C0;padding:8px 20px;font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:2px;color:#64B5F6;">GROUP B — 18 PLAYERS</div>
+  </div>
+
+  <div class="players-grid">
+    <!-- Group A -->
+    <div class="player-card fade-in"><div class="pc-no">22</div><div class="pc-name">HEAB SOKVATH</div><div class="pc-khmer">ហ៊ាប សុវត្ថ</div><div class="pc-badge">Group A</div></div>
+    <div class="player-card fade-in"><div class="pc-no">01</div><div class="pc-name">TY THOM</div><div class="pc-khmer">មិត ទី</div><div class="pc-badge">Group A · GK</div></div>
+    <div class="player-card fade-in"><div class="pc-no">20</div><div class="pc-name">H. LYHEANG</div><div class="pc-khmer">ហឹង លីហ៊ាង</div><div class="pc-badge">Group A</div></div>
+    <div class="player-card fade-in"><div class="pc-no">18</div><div class="pc-name">REAK SA</div><div class="pc-khmer">រឿន វីរាក់</div><div class="pc-badge">Group A</div></div>
+    <div class="player-card fade-in"><div class="pc-no">17</div><div class="pc-name">NY BROS THY</div><div class="pc-khmer">នី វិទ្ធី</div><div class="pc-badge">Group A</div></div>
+    <div class="player-card fade-in"><div class="pc-no">19</div><div class="pc-name">P. VICHEKA</div><div class="pc-khmer">ផន វិច្ចកា</div><div class="pc-badge">Group A</div></div>
+    <div class="player-card fade-in"><div class="pc-no">10</div><div class="pc-name">HOUNG LYMENG</div><div class="pc-khmer">ហួង លីម៉េង</div><div class="pc-badge">Group A</div></div>
+    <div class="player-card fade-in"><div class="pc-no">07</div><div class="pc-name">THON SOKUNTHEAR</div><div class="pc-khmer">ថោន សុគុន្ធា</div><div class="pc-badge">Group A</div></div>
+    <div class="player-card fade-in"><div class="pc-no">11</div><div class="pc-name">THORNG NEW</div><div class="pc-khmer">ខ្មៅ អេពូថង</div><div class="pc-badge">Group A</div></div>
+    <div class="player-card fade-in"><div class="pc-no">47</div><div class="pc-name">HENG NENG</div><div class="pc-khmer">ហេង ណេង</div><div class="pc-badge">Group A</div></div>
+    <div class="player-card fade-in"><div class="pc-no">21</div><div class="pc-name">VANN CHHONG</div><div class="pc-khmer">ឈី វ៉ាន់ឆុង</div><div class="pc-badge">Group A</div></div>
+    <div class="player-card fade-in"><div class="pc-no">08</div><div class="pc-name">AH TEV</div><div class="pc-khmer">តូ ទៀវ</div><div class="pc-badge">Group A</div></div>
+    <div class="player-card fade-in"><div class="pc-no">04</div><div class="pc-name">SOK VORN</div><div class="pc-khmer">លាត សាវន</div><div class="pc-badge">Group A</div></div>
+    <div class="player-card fade-in"><div class="pc-no">09</div><div class="pc-name">VONG BRA VO</div><div class="pc-khmer">ឆែម វ៉ូ</div><div class="pc-badge">Group A</div></div>
+    <div class="player-card fade-in"><div class="pc-no">14</div><div class="pc-name">HEAR</div><div class="pc-khmer">អាហៀ</div><div class="pc-badge">Group A</div></div>
+    <div class="player-card fade-in"><div class="pc-no">06</div><div class="pc-name">SAM BAN POEUN</div><div class="pc-khmer">ពឿន សំបាន</div><div class="pc-badge">Group A</div></div>
+    <div class="player-card fade-in"><div class="pc-no">93</div><div class="pc-name">VIRONG</div><div class="pc-khmer">វីរ៉ុង</div><div class="pc-badge">Group A</div></div>
+    <div class="player-card fade-in"><div class="pc-no">—</div><div class="pc-name">PUNRAY</div><div class="pc-khmer">ពុនរាយ</div><div class="pc-badge">Group A</div></div>
+    <!-- Group B -->
+    <div class="player-card fade-in" style="border-color:rgba(21,101,192,0.3)"><div class="pc-no" style="color:rgba(21,101,192,0.5)">09</div><div class="pc-name">THEARA</div><div class="pc-khmer">&nbsp;</div><div class="pc-badge" style="background:rgba(21,101,192,0.2);color:#64B5F6;">Group B</div></div>
+    <div class="player-card fade-in" style="border-color:rgba(21,101,192,0.3)"><div class="pc-no" style="color:rgba(21,101,192,0.5)">14</div><div class="pc-name">SAN SAKHORN</div><div class="pc-khmer">&nbsp;</div><div class="pc-badge" style="background:rgba(21,101,192,0.2);color:#64B5F6;">Group B</div></div>
+    <div class="player-card fade-in" style="border-color:rgba(21,101,192,0.3)"><div class="pc-no" style="color:rgba(21,101,192,0.5)">14</div><div class="pc-name">V. SAL</div><div class="pc-khmer">&nbsp;</div><div class="pc-badge" style="background:rgba(21,101,192,0.2);color:#64B5F6;">Group B</div></div>
+    <div class="player-card fade-in" style="border-color:rgba(21,101,192,0.3)"><div class="pc-no" style="color:rgba(21,101,192,0.5)">06</div><div class="pc-name">TII VII</div><div class="pc-khmer">&nbsp;</div><div class="pc-badge" style="background:rgba(21,101,192,0.2);color:#64B5F6;">Group B</div></div>
+    <div class="player-card fade-in" style="border-color:rgba(21,101,192,0.3)"><div class="pc-no" style="color:rgba(21,101,192,0.5)">01</div><div class="pc-name">TY THOM</div><div class="pc-khmer">&nbsp;</div><div class="pc-badge" style="background:rgba(21,101,192,0.2);color:#64B5F6;">Group B · GK</div></div>
+    <div class="player-card fade-in" style="border-color:rgba(21,101,192,0.3)"><div class="pc-no" style="color:rgba(21,101,192,0.5)">06</div><div class="pc-name">LYHUY</div><div class="pc-khmer">&nbsp;</div><div class="pc-badge" style="background:rgba(21,101,192,0.2);color:#64B5F6;">Group B</div></div>
+    <div class="player-card fade-in" style="border-color:rgba(21,101,192,0.3)"><div class="pc-no" style="color:rgba(21,101,192,0.5)">10</div><div class="pc-name">OUN DAA</div><div class="pc-khmer">&nbsp;</div><div class="pc-badge" style="background:rgba(21,101,192,0.2);color:#64B5F6;">Group B</div></div>
+    <div class="player-card fade-in" style="border-color:rgba(21,101,192,0.3)"><div class="pc-no" style="color:rgba(21,101,192,0.5)">34</div><div class="pc-name">H. VOEUY</div><div class="pc-khmer">&nbsp;</div><div class="pc-badge" style="background:rgba(21,101,192,0.2);color:#64B5F6;">Group B</div></div>
+    <div class="player-card fade-in" style="border-color:rgba(21,101,192,0.3)"><div class="pc-no" style="color:rgba(21,101,192,0.5)">10</div><div class="pc-name">PHOY SOCHEATA</div><div class="pc-khmer">&nbsp;</div><div class="pc-badge" style="background:rgba(21,101,192,0.2);color:#64B5F6;">Group B</div></div>
+    <div class="player-card fade-in" style="border-color:rgba(21,101,192,0.3)"><div class="pc-no" style="color:rgba(21,101,192,0.5)">11</div><div class="pc-name">CHING SREYTIN</div><div class="pc-khmer">&nbsp;</div><div class="pc-badge" style="background:rgba(21,101,192,0.2);color:#64B5F6;">Group B</div></div>
+    <div class="player-card fade-in" style="border-color:rgba(21,101,192,0.3)"><div class="pc-no" style="color:rgba(21,101,192,0.5)">—</div><div class="pc-name">LIN</div><div class="pc-khmer">&nbsp;</div><div class="pc-badge" style="background:rgba(21,101,192,0.2);color:#64B5F6;">Group B</div></div>
+    <div class="player-card fade-in" style="border-color:rgba(21,101,192,0.3)"><div class="pc-no" style="color:rgba(21,101,192,0.5)">23</div><div class="pc-name">N. BUNCHEM</div><div class="pc-khmer">&nbsp;</div><div class="pc-badge" style="background:rgba(21,101,192,0.2);color:#64B5F6;">Group B</div></div>
+    <div class="player-card fade-in" style="border-color:rgba(21,101,192,0.3)"><div class="pc-no" style="color:rgba(21,101,192,0.5)">17</div><div class="pc-name">AH TAK</div><div class="pc-khmer">&nbsp;</div><div class="pc-badge" style="background:rgba(21,101,192,0.2);color:#64B5F6;">Group B</div></div>
+    <div class="player-card fade-in" style="border-color:rgba(21,101,192,0.3)"><div class="pc-no" style="color:rgba(21,101,192,0.5)">19</div><div class="pc-name">S. MANY</div><div class="pc-khmer">&nbsp;</div><div class="pc-badge" style="background:rgba(21,101,192,0.2);color:#64B5F6;">Group B</div></div>
+    <div class="player-card fade-in" style="border-color:rgba(21,101,192,0.3)"><div class="pc-no" style="color:rgba(21,101,192,0.5)">93</div><div class="pc-name">VIRONG</div><div class="pc-khmer">&nbsp;</div><div class="pc-badge" style="background:rgba(21,101,192,0.2);color:#64B5F6;">Group B</div></div>
+    <div class="player-card fade-in" style="border-color:rgba(21,101,192,0.3)"><div class="pc-no" style="color:rgba(21,101,192,0.5)">12</div><div class="pc-name">V. SEYHA</div><div class="pc-khmer">&nbsp;</div><div class="pc-badge" style="background:rgba(21,101,192,0.2);color:#64B5F6;">Group B</div></div>
+    <div class="player-card fade-in" style="border-color:rgba(21,101,192,0.3)"><div class="pc-no" style="color:rgba(21,101,192,0.5)">06</div><div class="pc-name">NANA</div><div class="pc-khmer">&nbsp;</div><div class="pc-badge" style="background:rgba(21,101,192,0.2);color:#64B5F6;">Group B</div></div>
+    <div class="player-card fade-in" style="border-color:rgba(21,101,192,0.3)"><div class="pc-no" style="color:rgba(21,101,192,0.5)">10</div><div class="pc-name">AN SOKPHARY</div><div class="pc-khmer">&nbsp;</div><div class="pc-badge" style="background:rgba(21,101,192,0.2);color:#64B5F6;">Group B</div></div>
+  </div>
+</section>
+
+<!-- SPONSOR -->
+<section id="sponsor">
+  <div class="section-label">Partnership</div>
+  <div class="section-title">BECOME A<br>SPONSOR</div>
+  <div class="section-sub">Support AHTOR FC and grow your brand in Siem Reap. Your logo. Our jerseys. Our community. Your impact.</div>
+  <div class="sponsor-grid">
+    <div class="sponsor-tier tier-gold fade-in">
+      <div class="tier-header"><div class="tier-icon">🥇</div><div class="tier-name">GOLD</div><div class="tier-price">$500 <span>/ Season</span></div></div>
+      <div class="tier-body">
+        <div class="tier-feature">Your name in club title: "AHTOR FC — [Your Business]"</div>
+        <div class="tier-feature">Logo on FRONT of all 36 jerseys</div>
+        <div class="tier-feature">Large banner at ALL matches</div>
+        <div class="tier-feature">Monthly social media post about your business</div>
+        <div class="tier-feature">VIP seats at all home matches</div>
+        <div class="tier-feature">Certificate of Sponsorship</div>
+        <div class="tier-feature" style="color:var(--yellow);font-weight:600;">1 SLOT ONLY — Exclusive!</div>
+      </div>
+    </div>
+    <div class="sponsor-tier tier-silver fade-in">
+      <div class="tier-header"><div class="tier-icon">🥈</div><div class="tier-name">SILVER</div><div class="tier-price">$250 <span>/ Season</span></div></div>
+      <div class="tier-body">
+        <div class="tier-feature">Logo on BACK of all 36 jerseys</div>
+        <div class="tier-feature">Banner at home matches</div>
+        <div class="tier-feature">Social media mention every 2 months</div>
+        <div class="tier-feature">Logo on printed materials</div>
+        <div class="tier-feature">2 free tournament tickets</div>
+        <div class="tier-feature">Certificate of Sponsorship</div>
+        <div class="tier-feature" style="color:#aaa;font-weight:600;">MAX 2 SPONSORS</div>
+      </div>
+    </div>
+    <div class="sponsor-tier tier-bronze fade-in">
+      <div class="tier-header"><div class="tier-icon">🥉</div><div class="tier-name">BRONZE</div><div class="tier-price">$100 <span>/ Season</span></div></div>
+      <div class="tier-body">
+        <div class="tier-feature">Logo on training jerseys or shorts</div>
+        <div class="tier-feature">3 social media mentions per season</div>
+        <div class="tier-feature">Listed on website & Telegram channel</div>
+        <div class="tier-feature">Certificate of Sponsorship</div>
+        <div class="tier-feature" style="color:#cd7f32;font-weight:600;">UNLIMITED — Open to all!</div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:48px;">
+    <a href="#contact" class="btn-primary" style="font-size:15px;padding:18px 48px;">Contact Us to Sponsor</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get In Touch</div>
+  <div class="section-title">CONTACT US</div>
+  <div class="contact-grid">
+    <div class="fade-in">
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div><div class="contact-label">Phone / WhatsApp</div><div class="contact-value"><a href="tel:068500601">068 500 601</a></div></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✈️</div>
+        <div><div class="contact-label">Telegram</div><div class="contact-value"><a href="https://t.me/ahtorfootball">@ahtorfootball</a></div></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📧</div>
+        <div><div class="contact-label">Email</div><div class="contact-value"><a href="mailto:weareahtor2021@gmail.com">weareahtor2021@gmail.com</a></div></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🌐</div>
+        <div><div class="contact-label">Website</div><div class="contact-value"><a href="http://www.weareahtor.com" target="_blank">www.weareahtor.com</a></div></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div><div class="contact-label">Location</div><div class="contact-value">Angkor Chum District,<br>Siem Reap Province, Cambodia</div></div>
+      </div>
+    </div>
+    <div class="contact-right fade-in">
+      <h3>JOIN THE FAMILY</h3>
+      <p style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7;">Whether you want to join the team, enroll in our Youth Academy, sponsor the club, or just support us — we want to hear from you. AHTOR FC is more than a football club. We are a family.</p>
+      <div class="quote-block">
+        <p>"យើងខ្លាំងជាងមុន នៅពេលយើងរួបរួមគ្នា"</p>
+        <cite>— AHTOR FC (អាទរ) · Season 2026</cite>
+      </div>
+      <div style="margin-top:32px;">
+        <a href="mailto:weareahtor2021@gmail.com" class="btn-primary">Send Us an Email</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">AHTOR <span>FC</span></div>
+  <div class="footer-copy">© 2026 AHTOR FC (អាទរ) · Siem Reap, Cambodia · All Rights Reserved</div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#players">Players</a>
+    <a href="#sponsor">Sponsor</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
