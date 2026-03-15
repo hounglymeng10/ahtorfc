@@ -251,6 +251,7 @@
     padding: 20px 16px;
     transition: transform 0.2s, border-color 0.2s, background 0.2s;
     cursor: pointer; position: relative; overflow: hidden;
+    text-align: center;
   }
   .player-card::before {
     content: '';
@@ -259,21 +260,45 @@
   }
   .player-card:hover { transform: translateY(-4px); border-color: var(--yellow); }
   .player-card:hover::before { background: var(--yellow); }
+
+  /* ── PLAYER AVATAR ── */
+  .pc-avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(27,107,47,0.6);
+    margin: 0 auto 10px;
+    background: rgba(27,107,47,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px; color: rgba(255,255,255,0.3);
+    transition: border-color 0.2s;
+  }
+  .player-card:hover .pc-avatar { border-color: var(--yellow); }
+  .pc-avatar img {
+    width: 100%; height: 100%;
+    object-fit: cover; border-radius: 50%;
+    display: block;
+  }
+
   .pc-no {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 42px; line-height: 1; color: rgba(27,107,47,0.4);
-    margin-bottom: 8px;
+    font-size: 36px; line-height: 1; color: rgba(27,107,47,0.5);
+    margin-bottom: 6px;
   }
   .pc-name {
     font-family: 'MiSans Khmer', sans-serif;
-    font-size: 14px; font-weight: 700; letter-spacing: 0.5px;
+    font-size: 13px; font-weight: 700; letter-spacing: 0.5px;
     color: var(--white); margin-bottom: 4px;
   }
-  .pc-khmer { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 10px; }
-  .pc-badge {
+  .pc-khmer { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 10px; }
+
+  /* ── POSITION BADGE ── */
+  .pc-position {
     display: inline-block;
-    background: rgba(27,107,47,0.3);
+    background: rgba(244,196,48,0.12);
     color: var(--yellow);
+    border: 1px solid rgba(244,196,48,0.3);
     font-family: 'MiSans Khmer', sans-serif;
     font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
     text-transform: uppercase; padding: 3px 8px;
@@ -409,14 +434,118 @@
   }
   .fade-in.visible { opacity: 1; transform: translateY(0); }
 
+  /* ── HAMBURGER MENU ── */
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; padding: 8px; background: none; border: none;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--white); transition: all 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none; position: fixed; top: 64px; left: 0; right: 0;
+    background: rgba(14,26,16,0.98); backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--green);
+    flex-direction: column; padding: 20px 24px; gap: 4px; z-index: 99;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'MiSans Khmer', sans-serif;
+    font-size: 15px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: #aaccb0; text-decoration: none;
+    padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: color 0.2s;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:hover { color: var(--yellow); }
+
   @media (max-width: 768px) {
+    /* NAV */
     nav { padding: 0 20px; }
     .nav-links { display: none; }
-    section { padding: 64px 20px; }
-    .hero { padding: 100px 20px 160px; }
-    .hero-stats { right: 20px; gap: 20px; }
-    .about-grid, .contact-grid, .sponsor-grid { grid-template-columns: 1fr; }
-    .players-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+    .hamburger { display: flex; }
+
+    /* SECTIONS */
+    section { padding: 56px 20px; }
+
+    /* HERO */
+    .hero {
+      padding: 90px 20px 200px;
+      min-height: 100svh;
+    }
+    .hero h1 { font-size: clamp(52px, 14vw, 72px); }
+    .hero-khmer { font-size: 18px; letter-spacing: 3px; }
+    .hero p { font-size: 14px; }
+    .hero-btns { flex-direction: column; gap: 12px; }
+    .btn-primary, .btn-outline { text-align: center; width: 100%; padding: 14px 20px; }
+
+    /* HERO STATS */
+    .hero-stats {
+      position: absolute; bottom: 32px;
+      left: 20px; right: 20px;
+      display: flex; gap: 0;
+      background: rgba(14,26,16,0.7);
+      border: 1px solid rgba(27,107,47,0.3);
+    }
+    .hero-stat {
+      flex: 1; padding: 16px 8px;
+      border-right: 1px solid rgba(27,107,47,0.3);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat .num { font-size: 32px; }
+    .hero-stat .lbl { font-size: 9px; }
+
+    /* GRIDS */
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+    .sponsor-grid { grid-template-columns: 1fr; gap: 16px; }
+
+    /* ABOUT */
+    .about-right { padding: 28px 20px; }
+    .ci-label { font-size: 10px; }
+    .ci-value { font-size: 12px; max-width: 180px; }
+
+    /* PLAYERS GRID — 3 columns on mobile */
+    .players-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .player-card { padding: 14px 10px; }
+    .pc-avatar { width: 52px; height: 52px; font-size: 16px; }
+    .pc-no { font-size: 26px; margin-bottom: 4px; }
+    .pc-name { font-size: 10px; letter-spacing: 0; }
+    .pc-khmer { font-size: 9px; margin-bottom: 6px; }
+    .pc-position { font-size: 8px; padding: 2px 6px; letter-spacing: 0.5px; }
+
+    /* GROUP BADGES row */
+    #players > div[style] { flex-direction: column; }
+
+    /* SPONSOR */
+    .tier-header { padding: 20px 16px; }
+    .tier-body { padding: 20px 16px; }
+    .tier-price { font-size: 24px; }
+
+    /* CONTACT */
+    .contact-right { padding: 24px 20px; }
+    .quote-block p { font-size: 17px; }
+
+    /* FOOTER */
+    footer {
+      flex-direction: column; align-items: flex-start;
+      padding: 28px 20px; gap: 16px; text-align: left;
+    }
+    .footer-links { flex-wrap: wrap; gap: 16px; }
+    .footer-copy { font-size: 11px; }
+  }
+
+  @media (max-width: 380px) {
+    .players-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero h1 { font-size: 46px; }
   }
 </style>
 </head>
@@ -433,7 +562,18 @@
     <li><a href="blog.html">Blog</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#players" onclick="closeMenu()">Players</a>
+  <a href="#sponsor" onclick="closeMenu()">Sponsor</a>
+  <a href="merchandise.html">Merchandise</a>
+  <a href="blog.html">Blog</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -539,7 +679,7 @@
 <section id="players">
   <div class="section-label">The Squad</div>
   <div class="section-title">OUR PLAYERS</div>
-  <div class="section-sub">Meet the 36 dedicated players of AHTOR FC — Group A & Group B — all born in Siem Reap, all playing for the same dream.</div>
+  <div class="section-sub">AHTOR FC PLAYERS</div>
 
   <div style="display:flex;gap:12px;margin-bottom:32px;">
     <div style="background:rgba(27,107,47,0.2);border:1px solid var(--green);padding:8px 20px;font-family:'MiSans Khmer',sans-serif;font-size:12px;letter-spacing:2px;color:var(--yellow);">GROUP A — 18 PLAYERS</div>
@@ -548,24 +688,185 @@
 
   <div class="players-grid">
     <!-- Group A -->
-    <div class="player-card fade-in"><div class="pc-no">22</div><div class="pc-name">HEAB SOKVATH</div><div class="pc-khmer">ហ៊ាប សុវត្ថ</div><div class="pc-badge">Group A</div></div>
-    <div class="player-card fade-in"><div class="pc-no">01</div><div class="pc-name">TY THOM</div><div class="pc-khmer">មិត ទី</div><div class="pc-badge">Group A · GK</div></div>
-    <div class="player-card fade-in"><div class="pc-no">20</div><div class="pc-name">H. LYHEANG</div><div class="pc-khmer">ហឹង លីហ៊ាង</div><div class="pc-badge">Group A</div></div>
-    <div class="player-card fade-in"><div class="pc-no">18</div><div class="pc-name">REAK SA</div><div class="pc-khmer">រឿន វីរាក់</div><div class="pc-badge">Group A</div></div>
-    <div class="player-card fade-in"><div class="pc-no">17</div><div class="pc-name">NY BROS THY</div><div class="pc-khmer">នី វិទ្ធី</div><div class="pc-badge">Group A</div></div>
-    <div class="player-card fade-in"><div class="pc-no">19</div><div class="pc-name">P. VICHEKA</div><div class="pc-khmer">ផន វិច្ចកា</div><div class="pc-badge">Group A</div></div>
-    <div class="player-card fade-in"><div class="pc-no">10</div><div class="pc-name">HOUNG LYMENG</div><div class="pc-khmer">ហួង លីម៉េង</div><div class="pc-badge">Group A</div></div>
-    <div class="player-card fade-in"><div class="pc-no">07</div><div class="pc-name">THON SOKUNTHEAR</div><div class="pc-khmer">ថោន សុគុន្ធា</div><div class="pc-badge">Group A</div></div>
-    <div class="player-card fade-in"><div class="pc-no">11</div><div class="pc-name">THORNG NEW</div><div class="pc-khmer">ខ្មៅ អេពូថង</div><div class="pc-badge">Group A</div></div>
-    <div class="player-card fade-in"><div class="pc-no">47</div><div class="pc-name">HENG NENG</div><div class="pc-khmer">ហេង ណេង</div><div class="pc-badge">Group A</div></div>
-    <div class="player-card fade-in"><div class="pc-no">21</div><div class="pc-name">VANN CHHONG</div><div class="pc-khmer">ឈី វ៉ាន់ឆុង</div><div class="pc-badge">Group A</div></div>
-    <div class="player-card fade-in"><div class="pc-no">08</div><div class="pc-name">AH TEV</div><div class="pc-khmer">តូ ទៀវ</div><div class="pc-badge">Group A</div></div>
-    <div class="player-card fade-in"><div class="pc-no">04</div><div class="pc-name">SOK VORN</div><div class="pc-khmer">លាត សាវន</div><div class="pc-badge">Group A</div></div>
-    <div class="player-card fade-in"><div class="pc-no">09</div><div class="pc-name">VONG BRA VO</div><div class="pc-khmer">ឆែម វ៉ូ</div><div class="pc-badge">Group A</div></div>
-    <div class="player-card fade-in"><div class="pc-no">14</div><div class="pc-name">HEAR</div><div class="pc-khmer">អាហៀ</div><div class="pc-badge">Group A</div></div>
-    <div class="player-card fade-in"><div class="pc-no">06</div><div class="pc-name">SAM BAN POEUN</div><div class="pc-khmer">ពឿន សំបាន</div><div class="pc-badge">Group A</div></div>
-    <div class="player-card fade-in"><div class="pc-no">93</div><div class="pc-name">VIRONG</div><div class="pc-khmer">វីរ៉ុង</div><div class="pc-badge">Group A</div></div>
-    <div class="player-card fade-in"><div class="pc-no">—</div><div class="pc-name">PUNRAY</div><div class="pc-khmer">ពុនរាយ</div><div class="pc-badge">Group A</div></div>
+    <div class="player-card fade-in">
+      <div class="pc-avatar">
+        <img src="players/22.jpg" alt="Heab Sokvath" onerror="this.style.display='none';this.parentElement.innerHTML='HS';">
+      </div>
+      <div class="pc-no">22</div>
+      <div class="pc-name">HEAB SOKVATH</div>
+      <div class="pc-khmer">ហ៊ាប សុវត្ថ</div>
+      <div class="pc-position">Goalkeeper</div>
+    </div>
+
+    <div class="player-card fade-in">
+      <div class="pc-avatar">
+        <img src="players/01.jpg" alt="Ty Thom" onerror="this.style.display='none';this.parentElement.innerHTML='TT';">
+      </div>
+      <div class="pc-no">01</div>
+      <div class="pc-name">TY THOM</div>
+      <div class="pc-khmer">មិត ទី</div>
+      <div class="pc-position">GK</div>
+    </div>
+
+    <div class="player-card fade-in">
+      <div class="pc-avatar">
+        <img src="players/20.jpg" alt="H. Lyheang" onerror="this.style.display='none';this.parentElement.innerHTML='HL';">
+      </div>
+      <div class="pc-no">20</div>
+      <div class="pc-name">H. LYHEANG</div>
+      <div class="pc-khmer">ហឹង លីហ៊ាង</div>
+      <div class="pc-position">Defender</div>
+    </div>
+
+    <div class="player-card fade-in">
+      <div class="pc-avatar">
+        <img src="players/18.jpg" alt="Reak Sa" onerror="this.style.display='none';this.parentElement.innerHTML='RS';">
+      </div>
+      <div class="pc-no">18</div>
+      <div class="pc-name">REAK SA</div>
+      <div class="pc-khmer">រឿន វីរាក់</div>
+      <div class="pc-position">Defender</div>
+    </div>
+
+    <div class="player-card fade-in">
+      <div class="pc-avatar">
+        <img src="players/17.jpg" alt="Ny Bros Thy" onerror="this.style.display='none';this.parentElement.innerHTML='NT';">
+      </div>
+      <div class="pc-no">17</div>
+      <div class="pc-name">NY BROS THY</div>
+      <div class="pc-khmer">នី វិទ្ធី</div>
+      <div class="pc-position">Midfielder</div>
+    </div>
+
+    <div class="player-card fade-in">
+      <div class="pc-avatar">
+        <img src="players/19.jpg" alt="P. Vicheka" onerror="this.style.display='none';this.parentElement.innerHTML='PV';">
+      </div>
+      <div class="pc-no">19</div>
+      <div class="pc-name">P. VICHEKA</div>
+      <div class="pc-khmer">ផន វិច្ចកា</div>
+      <div class="pc-position">Midfielder</div>
+    </div>
+
+    <div class="player-card fade-in">
+      <div class="pc-avatar">
+        <img src="players/10.jpg" alt="Houng Lymeng" onerror="this.style.display='none';this.parentElement.innerHTML='HL';">
+      </div>
+      <div class="pc-no">10</div>
+      <div class="pc-name">HOUNG LYMENG</div>
+      <div class="pc-khmer">ហួង លីម៉េង</div>
+      <div class="pc-position">Forward</div>
+    </div>
+
+    <div class="player-card fade-in">
+      <div class="pc-avatar">
+        <img src="players/07.jpg" alt="Thon Sokunthear" onerror="this.style.display='none';this.parentElement.innerHTML='TS';">
+      </div>
+      <div class="pc-no">07</div>
+      <div class="pc-name">THON SOKUNTHEAR</div>
+      <div class="pc-khmer">ថោន សុគុន្ធា</div>
+      <div class="pc-position">Midfielder</div>
+    </div>
+
+    <div class="player-card fade-in">
+      <div class="pc-avatar">
+        <img src="players/11.jpg" alt="Thorng New" onerror="this.style.display='none';this.parentElement.innerHTML='TN';">
+      </div>
+      <div class="pc-no">11</div>
+      <div class="pc-name">THORNG NEW</div>
+      <div class="pc-khmer">ខ្មៅ អេពូថង</div>
+      <div class="pc-position">Forward</div>
+    </div>
+
+    <div class="player-card fade-in">
+      <div class="pc-avatar">
+        <img src="players/47.jpg" alt="Heng Neng" onerror="this.style.display='none';this.parentElement.innerHTML='HN';">
+      </div>
+      <div class="pc-no">47</div>
+      <div class="pc-name">HENG NENG</div>
+      <div class="pc-khmer">ហេង ណេង</div>
+      <div class="pc-position">Defender</div>
+    </div>
+
+    <div class="player-card fade-in">
+      <div class="pc-avatar">
+        <img src="players/21.jpg" alt="Vann Chhong" onerror="this.style.display='none';this.parentElement.innerHTML='VC';">
+      </div>
+      <div class="pc-no">21</div>
+      <div class="pc-name">VANN CHHONG</div>
+      <div class="pc-khmer">ឈី វ៉ាន់ឆុង</div>
+      <div class="pc-position">Midfielder</div>
+    </div>
+
+    <div class="player-card fade-in">
+      <div class="pc-avatar">
+        <img src="players/08.jpg" alt="Ah Tev" onerror="this.style.display='none';this.parentElement.innerHTML='AT';">
+      </div>
+      <div class="pc-no">08</div>
+      <div class="pc-name">AH TEV</div>
+      <div class="pc-khmer">តូ ទៀវ</div>
+      <div class="pc-position">Midfielder</div>
+    </div>
+
+    <div class="player-card fade-in">
+      <div class="pc-avatar">
+        <img src="players/04.jpg" alt="Sok Vorn" onerror="this.style.display='none';this.parentElement.innerHTML='SV';">
+      </div>
+      <div class="pc-no">04</div>
+      <div class="pc-name">SOK VORN</div>
+      <div class="pc-khmer">លាត សាវន</div>
+      <div class="pc-position">Defender</div>
+    </div>
+
+    <div class="player-card fade-in">
+      <div class="pc-avatar">
+        <img src="players/09.jpg" alt="Vong Bra Vo" onerror="this.style.display='none';this.parentElement.innerHTML='VV';">
+      </div>
+      <div class="pc-no">09</div>
+      <div class="pc-name">VONG BRA VO</div>
+      <div class="pc-khmer">ឆែម វ៉ូ</div>
+      <div class="pc-position">Forward</div>
+    </div>
+
+    <div class="player-card fade-in">
+      <div class="pc-avatar">
+        <img src="players/14.jpg" alt="Hear" onerror="this.style.display='none';this.parentElement.innerHTML='HE';">
+      </div>
+      <div class="pc-no">14</div>
+      <div class="pc-name">HEAR</div>
+      <div class="pc-khmer">អាហៀ</div>
+      <div class="pc-position">Defender</div>
+    </div>
+
+    <div class="player-card fade-in">
+      <div class="pc-avatar">
+        <img src="players/06.jpg" alt="Sam Ban Poeun" onerror="this.style.display='none';this.parentElement.innerHTML='SP';">
+      </div>
+      <div class="pc-no">06</div>
+      <div class="pc-name">SAM BAN POEUN</div>
+      <div class="pc-khmer">ពឿន សំបាន</div>
+      <div class="pc-position">Midfielder</div>
+    </div>
+
+    <div class="player-card fade-in">
+      <div class="pc-avatar">
+        <img src="players/93.jpg" alt="Virong" onerror="this.style.display='none';this.parentElement.innerHTML='VI';">
+      </div>
+      <div class="pc-no">93</div>
+      <div class="pc-name">VIRONG</div>
+      <div class="pc-khmer">វីរ៉ុង</div>
+      <div class="pc-position">Forward</div>
+    </div>
+
+    <div class="player-card fade-in">
+      <div class="pc-avatar">
+        <img src="players/punray.jpg" alt="Punray" onerror="this.style.display='none';this.parentElement.innerHTML='PR';">
+      </div>
+      <div class="pc-no">—</div>
+      <div class="pc-name">PUNRAY</div>
+      <div class="pc-khmer">ពុនរាយ</div>
+      <div class="pc-position">Midfielder</div>
+    </div>
   </div>
 </section>
 
@@ -578,33 +879,35 @@
     <div class="sponsor-tier tier-gold fade-in">
       <div class="tier-header"><div class="tier-icon">🥇</div><div class="tier-name">GOLD</div><div class="tier-price">$$ <span>/ Season</span></div></div>
       <div class="tier-body">
-        <div class="tier-feature">Your name in club title: "AHTOR FC — [Your Business]"</div>
-        <div class="tier-feature">Logo on FRONT of all 36 jerseys</div>
-        <div class="tier-feature">Large banner at ALL matches</div>
-        <div class="tier-feature">Monthly social media post about your business</div>
-        <div class="tier-feature">VIP seats at all home matches</div>
-        <div class="tier-feature">Certificate of Sponsorship</div>
-        <div class="tier-feature" style="color:var(--yellow);font-weight:600;">1 SLOT ONLY — Exclusive!</div>
+        <div class="tier-feature">Logo placement on the FRONT of all jerseys</div>
+        <div class="tier-feature">Fan Banners displayed at ALL matches (both Home and Away)</div>
+        <div class="tier-feature">Monthly business promotional posts on social media</div>
+        <div class="tier-feature">Photos and videos posted with the largest logo size</div>
+        <div class="tier-feature">Receive an official Sponsorship Certificate</div>
+        <div class="tier-feature">Name listed on the website</div>
+        <div class="tier-feature">Logo on all printed official documents</div>
+        <div class="tier-feature" style="color:var(--yellow);font-weight:600;">Only 1 slot available — Exclusive!</div>
       </div>
     </div>
     <div class="sponsor-tier tier-silver fade-in">
       <div class="tier-header"><div class="tier-icon">🥈</div><div class="tier-name">SILVER</div><div class="tier-price">$$ <span>/ Season</span></div></div>
       <div class="tier-body">
-        <div class="tier-feature">Logo on BACK of all 36 jerseys</div>
-        <div class="tier-feature">Banner at home matches</div>
-        <div class="tier-feature">Social media mention every 2 months</div>
-        <div class="tier-feature">Logo on printed materials</div>
-        <div class="tier-feature">2 free tournament tickets</div>
-        <div class="tier-feature">Certificate of Sponsorship</div>
-        <div class="tier-feature" style="color:#aaa;font-weight:600;">MAX 2 SPONSORS</div>
+        <div class="tier-feature">Logo placement on the BACK of all jerseys</div>
+        <div class="tier-feature">Fan Banners displayed at Home matches</div>
+        <div class="tier-feature">Photos and videos posted with logo</div>
+        <div class="tier-feature">Logo on all printed official documents</div>
+        <div class="tier-feature">Name listed on the website</div>
+        <div class="tier-feature">Receive an official Sponsorship Certificate</div>
+        <div class="tier-feature" style="color:#e93535;font-weight:600;">Limited to 2 companies only</div>
       </div>
     </div>
     <div class="sponsor-tier tier-bronze fade-in">
       <div class="tier-header"><div class="tier-icon">🥉</div><div class="tier-name">BRONZE</div><div class="tier-price">$$ <span>/ Season</span></div></div>
       <div class="tier-body">
-        <div class="tier-feature">Logo on training jerseys or shorts</div>
-        <div class="tier-feature">3 social media mentions per season</div>
-        <div class="tier-feature">Listed on website & Telegram channel</div>
+        <div class="tier-feature">Logo on training kits or match shorts</div>
+        <div class="tier-feature">Photos and videos posted with logo</div>
+        <div class="tier-feature">Receive an official Sponsorship Certificate</div>
+        <div class="tier-feature">Name listed on the website</div>
         <div class="tier-feature">Certificate of Sponsorship</div>
         <div class="tier-feature" style="color:#cd7f32;font-weight:600;">UNLIMITED — Open to all!</div>
       </div>
@@ -669,13 +972,23 @@
 </footer>
 
 <script>
-  // Scroll fade-in
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('visible'); }
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
 </script>
 </body>
 </html>
