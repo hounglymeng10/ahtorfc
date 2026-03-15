@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AHTOR FC — Admin Panel</title>
+<link rel="icon" type="image/png" href="LOGO2.png">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family:'MiSans Khmer'; src:url('MiSansKhmer-Medium.ttf') format('truetype'); font-weight:500; }
+  :root { --green:#1B6B2F; --green2:#2E8B57; --green3:#0d4a1f; --yellow:#F4C430; --gold:#D4A017; --white:#FFFFFF; --dark:#0e1a10; --red:#C0392B; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'MiSans Khmer','Barlow',sans-serif; background:#080f09; color:var(--white); min-height:100vh; }
+
+  /* LOGIN */
+  .login-screen { position:fixed; inset:0; background:#080f09; display:flex; align-items:center; justify-content:center; z-index:999; }
+  .login-box { background:#0f1f12; border:1px solid rgba(27,107,47,0.4); padding:48px 40px; width:380px; text-align:center; }
+  .login-logo { font-family:'Bebas Neue',sans-serif; font-size:36px; letter-spacing:4px; color:var(--white); margin-bottom:4px; }
+  .login-logo span { color:var(--yellow); }
+  .login-sub { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:36px; }
+  .login-label { font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.35); display:block; text-align:left; margin-bottom:6px; }
+  .login-input { width:100%; padding:12px 16px; background:rgba(255,255,255,0.04); border:1px solid rgba(27,107,47,0.3); color:var(--white); font-size:14px; outline:none; margin-bottom:16px; transition:border-color 0.2s; }
+  .login-input:focus { border-color:var(--yellow); }
+  .login-btn { width:100%; background:var(--yellow); color:var(--dark); font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:800; letter-spacing:3px; text-transform:uppercase; border:none; cursor:pointer; padding:14px; transition:background 0.2s; }
+  .login-btn:hover { background:var(--gold); }
+  .login-error { color:#ff6b6b; font-size:12px; margin-top:10px; display:none; }
+
+  /* ADMIN */
+  .admin-screen { display:none; }
+  .admin-screen.show { display:block; }
+
+  .topbar { background:#0f1f12; border-bottom:2px solid var(--green); padding:0 32px; height:60px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; }
+  .topbar-logo { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:3px; color:var(--white); }
+  .topbar-logo span { color:var(--yellow); }
+  .topbar-right { display:flex; gap:10px; align-items:center; }
+  .topbar-btn { font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:7px 14px; cursor:pointer; border:1px solid rgba(27,107,47,0.4); background:transparent; color:rgba(255,255,255,0.6); transition:all 0.2s; text-decoration:none; }
+  .topbar-btn:hover { background:var(--green); color:var(--white); }
+  .topbar-btn.yellow { background:var(--yellow); color:var(--dark); border-color:var(--yellow); }
+  .topbar-btn.yellow:hover { background:var(--gold); }
+  .topbar-btn.danger { border-color:rgba(192,57,43,0.4); color:rgba(255,100,80,0.8); }
+  .topbar-btn.danger:hover { background:var(--red); color:var(--white); border-color:var(--red); }
+
+  .admin-layout { display:grid; grid-template-columns:260px 1fr; min-height:calc(100vh - 60px); }
+
+  .sidebar { background:#0a1a0c; border-right:1px solid rgba(27,107,47,0.2); padding:20px 0; }
+  .sidebar-label { font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.2); margin-bottom:8px; padding:0 20px; }
+  .sidebar-btn { width:100%; display:flex; align-items:center; gap:12px; padding:11px 20px; background:transparent; border:none; color:rgba(255,255,255,0.5); font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:600; letter-spacing:1px; cursor:pointer; transition:all 0.2s; text-align:left; margin-bottom:2px; }
+  .sidebar-btn:hover, .sidebar-btn.active { background:rgba(27,107,47,0.2); color:var(--white); border-left:3px solid var(--yellow); }
+  .badge { margin-left:auto; background:var(--green); color:var(--white); font-size:10px; font-weight:800; padding:2px 7px; border-radius:10px; }
+
+  .content { padding:28px; overflow-y:auto; }
+  .panel { display:none; }
+  .panel.active { display:block; }
+  .panel-title { font-family:'Bebas Neue',sans-serif; font-size:30px; letter-spacing:2px; color:var(--white); margin-bottom:20px; }
+
+  /* PUBLISH BANNER */
+  .publish-banner { background:linear-gradient(135deg,rgba(244,196,48,0.15),rgba(27,107,47,0.15)); border:1px solid rgba(244,196,48,0.3); padding:20px 24px; margin-bottom:24px; display:flex; align-items:center; gap:16px; }
+  .publish-banner-icon { font-size:28px; }
+  .publish-banner-text { flex:1; }
+  .publish-banner-title { font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700; color:var(--yellow); margin-bottom:4px; letter-spacing:1px; }
+  .publish-banner-desc { font-size:12px; color:rgba(255,255,255,0.5); line-height:1.5; }
+  .publish-btn { background:var(--yellow); color:var(--dark); font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:800; letter-spacing:2px; text-transform:uppercase; border:none; cursor:pointer; padding:10px 20px; white-space:nowrap; transition:background 0.2s; }
+  .publish-btn:hover { background:var(--gold); }
+
+  .form-card { background:#0f1f12; border:1px solid rgba(27,107,47,0.25); padding:28px; margin-bottom:20px; }
+  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .form-full { grid-column:1/-1; }
+  .form-group { margin-bottom:14px; }
+  .form-label { font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.35); display:block; margin-bottom:6px; }
+  .form-input, .form-select, .form-textarea { width:100%; padding:11px 14px; background:rgba(255,255,255,0.04); border:1px solid rgba(27,107,47,0.3); color:var(--white); font-family:'MiSans Khmer','Barlow',sans-serif; font-size:13px; outline:none; transition:border-color 0.2s; }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color:var(--yellow); }
+  .form-select option { background:#0f1f12; }
+  .form-textarea { height:150px; resize:vertical; }
+
+  .img-upload { border:2px dashed rgba(27,107,47,0.4); padding:20px; text-align:center; cursor:pointer; transition:border-color 0.2s; }
+  .img-upload:hover { border-color:var(--yellow); }
+  .img-preview { width:100%; max-height:180px; object-fit:cover; margin-top:10px; display:none; border:1px solid rgba(27,107,47,0.3); }
+
+  .btn-row { display:flex; gap:10px; margin-top:8px; flex-wrap:wrap; }
+  .submit-btn { background:var(--yellow); color:var(--dark); font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:800; letter-spacing:2px; text-transform:uppercase; border:none; cursor:pointer; padding:12px 24px; transition:background 0.2s; }
+  .submit-btn:hover { background:var(--gold); }
+  .cancel-btn { background:transparent; color:rgba(255,255,255,0.4); font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; border:1px solid rgba(255,255,255,0.15); cursor:pointer; padding:11px 20px; transition:all 0.2s; }
+  .cancel-btn:hover { color:var(--white); border-color:rgba(255,255,255,0.3); }
+
+  /* TABLE */
+  .posts-table { width:100%; border-collapse:collapse; }
+  .posts-table th { font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.3); padding:10px 14px; text-align:left; border-bottom:1px solid rgba(255,255,255,0.06); }
+  .posts-table td { padding:12px 14px; border-bottom:1px solid rgba(255,255,255,0.04); font-size:13px; vertical-align:middle; }
+  .posts-table tr:hover td { background:rgba(27,107,47,0.07); }
+  .cat-badge { font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; padding:3px 9px; }
+  .action-btn { font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; padding:5px 11px; cursor:pointer; border:none; transition:all 0.15s; margin-right:4px; }
+  .edit-btn { background:rgba(27,107,47,0.3); color:var(--yellow); }
+  .edit-btn:hover { background:var(--green); color:var(--white); }
+  .del-btn { background:rgba(192,57,43,0.2); color:#ff8a80; }
+  .del-btn:hover { background:var(--red); color:var(--white); }
+
+  /* STATS */
+  .stats-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:14px; margin-bottom:24px; }
+  .stat-card { background:#0f1f12; border:1px solid rgba(27,107,47,0.2); border-top:3px solid var(--green); padding:18px; }
+  .stat-num { font-family:'Bebas Neue',sans-serif; font-size:38px; color:var(--yellow); line-height:1; }
+  .stat-lbl { font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-top:4px; }
+
+  /* HOW TO PUBLISH */
+  .steps-box { background:#0f1f12; border:1px solid rgba(244,196,48,0.2); padding:24px; margin-bottom:20px; }
+  .steps-box-title { font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; color:var(--yellow); margin-bottom:16px; letter-spacing:2px; text-transform:uppercase; }
+  .step-item { display:flex; gap:14px; align-items:flex-start; margin-bottom:14px; }
+  .step-num { width:28px; height:28px; background:var(--green); color:var(--white); font-family:'Bebas Neue',sans-serif; font-size:16px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .step-text { font-size:13px; color:rgba(255,255,255,0.6); line-height:1.5; }
+  .step-text strong { color:var(--white); }
+
+  .toast { position:fixed; bottom:24px; right:24px; z-index:9999; background:var(--green); color:var(--white); font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; letter-spacing:1px; padding:14px 22px; border-left:4px solid var(--yellow); transform:translateY(60px); opacity:0; transition:all 0.3s; }
+  .toast.show { transform:translateY(0); opacity:1; }
+
+  @media(max-width:768px) {
+    .admin-layout { grid-template-columns:1fr; }
+    .sidebar { display:none; }
+    .form-grid { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">AHTOR <span>FC</span></div>
+    <div class="login-sub">Admin Panel</div>
+    <label class="login-label">Username</label>
+    <input class="login-input" type="text" id="loginUser" placeholder="admin" onkeydown="if(event.key==='Enter')doLogin()">
+    <label class="login-label">Password</label>
+    <input class="login-input" type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">🔐 LOGIN</button>
+    <div class="login-error" id="loginError">❌ Wrong username or password!</div>
+    <div style="margin-top:16px;font-size:11px;color:rgba(255,255,255,0.2);">Default: admin / ahtor2026</div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="admin-screen" id="adminScreen">
+  <div class="topbar">
+    <div class="topbar-logo">AHTOR <span>FC</span> — Admin</div>
+    <div class="topbar-right">
+      <button class="topbar-btn yellow" onclick="downloadJSON()">⬇️ Save posts.json</button>
+      <a href="blog.html" target="_blank" class="topbar-btn">🌐 Blog</a>
+      <a href="index.html" target="_blank" class="topbar-btn">🏠 Home</a>
+      <button class="topbar-btn danger" onclick="doLogout()">🔒 Logout</button>
+    </div>
+  </div>
+
+  <div class="admin-layout">
+    <div class="sidebar">
+      <div style="padding:16px 20px 8px;">
+        <div class="sidebar-label">Menu</div>
+        <button class="sidebar-btn active" onclick="showPanel('dashboard',this)">📊 Dashboard</button>
+        <button class="sidebar-btn" onclick="showPanel('new-post',this)">✏️ New Post <span class="badge" id="sideCount">0</span></button>
+        <button class="sidebar-btn" onclick="showPanel('all-posts',this)">📋 All Posts</button>
+      </div>
+      <div style="padding:8px 20px;">
+        <div class="sidebar-label">Data</div>
+        <button class="sidebar-btn" onclick="showPanel('publish',this)">🚀 How to Publish</button>
+        <button class="sidebar-btn" onclick="showPanel('import',this)">📂 Import Posts</button>
+        <button class="sidebar-btn" onclick="showPanel('password',this)">🔑 Password</button>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- DASHBOARD -->
+      <div class="panel active" id="panel-dashboard">
+        <div class="panel-title">DASHBOARD</div>
+        <div class="publish-banner">
+          <div class="publish-banner-icon">🚀</div>
+          <div class="publish-banner-text">
+            <div class="publish-banner-title">Ready to Publish?</div>
+            <div class="publish-banner-desc">បន្ទាប់ពី Post ចប់ → Click "Save posts.json" → Upload ទៅ GitHub → Blog Update ភ្លាម!</div>
+          </div>
+          <button class="publish-btn" onclick="downloadJSON()">⬇️ Save posts.json</button>
+        </div>
+        <div class="stats-grid" id="statsGrid"></div>
+        <div class="form-card">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--yellow);margin-bottom:14px;letter-spacing:1px;text-transform:uppercase;">Recent Posts</div>
+          <div id="recentPosts"></div>
+        </div>
+      </div>
+
+      <!-- NEW POST -->
+      <div class="panel" id="panel-new-post">
+        <div class="panel-title" id="formTitle">NEW POST</div>
+        <div class="form-card">
+          <input type="hidden" id="editId">
+          <div class="form-grid">
+            <div class="form-group form-full">
+              <label class="form-label">Title / ចំណងជើង *</label>
+              <input class="form-input" type="text" id="postTitle" placeholder="e.g. AHTOR FC Win 3-0 vs Team B">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Category *</label>
+              <select class="form-select" id="postCat">
+                <option value="match">⚽ Match Results</option>
+                <option value="schedule">📅 Match Schedule</option>
+                <option value="news">📰 News & Updates</option>
+                <option value="training">🏋️ Training Photos</option>
+                <option value="announce">📢 Club Announcement</option>
+                <option value="event">🏆 Event / Tournament</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Date *</label>
+              <input class="form-input" type="date" id="postDate">
+            </div>
+            <div class="form-group form-full">
+              <label class="form-label">Content / មាតិកា *</label>
+              <textarea class="form-textarea" id="postContent" placeholder="Write your post content here...&#10;&#10;You can write in Khmer or English."></textarea>
+            </div>
+            <div class="form-group form-full">
+              <label class="form-label">Image (Optional)</label>
+              <div class="img-upload" onclick="document.getElementById('imgInput').click()">
+                <div style="font-size:28px;margin-bottom:6px;">🖼️</div>
+                <div style="font-size:12px;color:rgba(255,255,255,0.35);">Click to upload image (JPG/PNG) — Max 500KB recommended</div>
+                <img id="imgPreview" class="img-preview" alt="Preview">
+              </div>
+              <input type="file" id="imgInput" accept="image/*" style="display:none" onchange="previewImg(this)">
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="submit-btn" onclick="savePost()">💾 SAVE POST</button>
+            <button class="cancel-btn" onclick="resetForm()">Cancel</button>
+          </div>
+          <div style="margin-top:14px;padding:12px 16px;background:rgba(244,196,48,0.06);border:1px solid rgba(244,196,48,0.2);font-size:12px;color:rgba(255,255,255,0.45);line-height:1.6;">
+            ⚠️ <strong style="color:var(--yellow);">After saving</strong> → Click <strong style="color:var(--yellow);">"Save posts.json"</strong> button at top → Upload to GitHub → Blog Live!
+          </div>
+        </div>
+      </div>
+
+      <!-- ALL POSTS -->
+      <div class="panel" id="panel-all-posts">
+        <div class="panel-title">ALL POSTS</div>
+        <div class="form-card" style="padding:0;overflow:hidden;">
+          <table class="posts-table">
+            <thead><tr><th>Title</th><th>Category</th><th>Date</th><th>Actions</th></tr></thead>
+            <tbody id="postsBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- HOW TO PUBLISH -->
+      <div class="panel" id="panel-publish">
+        <div class="panel-title">HOW TO PUBLISH</div>
+        <div class="steps-box">
+          <div class="steps-box-title">📋 Workflow — Post Blog ហើយ Publish ទៅ Website</div>
+          <div class="step-item"><div class="step-num">1</div><div class="step-text"><strong>Login</strong> ទៅ admin.html → <strong>New Post</strong> → Fill Title, Category, Date, Content, Image → Click <strong>"Save Post"</strong></div></div>
+          <div class="step-item"><div class="step-num">2</div><div class="step-text">Click button <strong style="color:var(--yellow);">"⬇️ Save posts.json"</strong> នៅខាងលើ → File <strong>posts.json</strong> Download ទៅ Computer</div></div>
+          <div class="step-item"><div class="step-num">3</div><div class="step-text">ទៅ <strong>GitHub</strong> → Repository <strong>ahtorfc</strong> → <strong>Upload files</strong> → Upload <strong>posts.json</strong> → <strong>Commit changes</strong></div></div>
+          <div class="step-item"><div class="step-num">4</div><div class="step-text">រង់ចាំ <strong>2-3 នាទី</strong> → ទៅ <strong>blog.html</strong> → <strong>Refresh</strong> → Post បង្ហាញ! ✅</div></div>
+        </div>
+        <div class="steps-box" style="border-color:rgba(192,57,43,0.2);">
+          <div class="steps-box-title" style="color:#ff8a80;">⚠️ Important Notes</div>
+          <div class="step-item"><div class="step-num" style="background:var(--red);">!</div><div class="step-text">Posts រក្សាក្នុង <strong>Browser localStorage</strong> — <strong>Export posts.json</strong> ជានិច្ចមុន Clear Browser!</div></div>
+          <div class="step-item"><div class="step-num" style="background:var(--red));">!</div><div class="step-text">Image ធំពេក → Website Load យឺត — Compress Image ក្នុង <strong>squoosh.app</strong> មុន Upload!</div></div>
+        </div>
+      </div>
+
+      <!-- IMPORT -->
+      <div class="panel" id="panel-import">
+        <div class="panel-title">IMPORT POSTS</div>
+        <div class="form-card">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--yellow);margin-bottom:8px;">📂 Import from posts.json</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.6;margin-bottom:16px;">Import posts.json ពី GitHub ឬ Backup ដែលធ្វើពីមុន</div>
+          <button class="submit-btn" onclick="document.getElementById('importInput').click()">⬆️ Import posts.json</button>
+          <input type="file" id="importInput" accept=".json" style="display:none" onchange="importJSON(this)">
+        </div>
+        <div class="form-card" style="border-color:rgba(192,57,43,0.2);">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:#ff8a80;margin-bottom:8px;">🗑️ Clear All Posts</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:14px;">លុប Posts ទាំងអស់ក្នុង Browser — Export posts.json ជាមុន!</div>
+          <button class="submit-btn" style="background:var(--red);" onclick="clearAll()">🗑️ Clear All</button>
+        </div>
+      </div>
+
+      <!-- PASSWORD -->
+      <div class="panel" id="panel-password">
+        <div class="panel-title">CHANGE PASSWORD</div>
+        <div class="form-card" style="max-width:380px;">
+          <div class="form-group">
+            <label class="form-label">Current Password</label>
+            <input class="form-input" type="password" id="curPass" placeholder="Current password">
+          </div>
+          <div class="form-group">
+            <label class="form-label">New Password</label>
+            <input class="form-input" type="password" id="newPass" placeholder="Min 6 characters">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Confirm New Password</label>
+            <input class="form-input" type="password" id="conPass" placeholder="Repeat new password">
+          </div>
+          <button class="submit-btn" onclick="changePassword()">🔑 CHANGE PASSWORD</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── AUTH ──
+const DEF_USER = 'admin';
+const DEF_PASS = 'ahtor2026';
+function getCreds() { return { user: localStorage.getItem('ahtor_user')||DEF_USER, pass: localStorage.getItem('ahtor_pass')||DEF_PASS }; }
+
+function doLogin() {
+  const u = document.getElementById('loginUser').value.trim();
+  const p = document.getElementById('loginPass').value;
+  const c = getCreds();
+  if (u === c.user && p === c.pass) {
+    sessionStorage.setItem('ahtor_logged','1');
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminScreen').classList.add('show');
+    refreshAll();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
+}
+
+function doLogout() { sessionStorage.removeItem('ahtor_logged'); location.reload(); }
+
+function changePassword() {
+  const cur = document.getElementById('curPass').value;
+  const nw  = document.getElementById('newPass').value;
+  const con = document.getElementById('conPass').value;
+  if (cur !== getCreds().pass) { toast('❌ Wrong current password!'); return; }
+  if (nw !== con)               { toast('❌ Passwords do not match!'); return; }
+  if (nw.length < 6)            { toast('❌ Min 6 characters!'); return; }
+  localStorage.setItem('ahtor_pass', nw);
+  toast('✅ Password changed!');
+  ['curPass','newPass','conPass'].forEach(id => document.getElementById(id).value = '');
+}
+
+if (sessionStorage.getItem('ahtor_logged') === '1') {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminScreen').classList.add('show');
+}
+
+// ── POSTS ──
+const CAT = {
+  match:    { label:'Match Results', cls:'cat-match',    icon:'⚽', color:'#C0392B' },
+  schedule: { label:'Schedule',      cls:'cat-schedule', icon:'📅', color:'#1565C0' },
+  news:     { label:'News',          cls:'cat-news',     icon:'📰', color:'#1B6B2F' },
+  training: { label:'Training',      cls:'cat-training', icon:'🏋️', color:'#6A1B9A' },
+  announce: { label:'Announcement',  cls:'cat-announce', icon:'📢', color:'#D4A017' },
+  event:    { label:'Event',         cls:'cat-event',    icon:'🏆', color:'#E65100' },
+};
+
+function getPosts() { return JSON.parse(localStorage.getItem('ahtor_posts')||'[]'); }
+function setPosts(p) { localStorage.setItem('ahtor_posts', JSON.stringify(p)); }
+
+document.getElementById('postDate').valueAsDate = new Date();
+
+function savePost() {
+  const title   = document.getElementById('postTitle').value.trim();
+  const cat     = document.getElementById('postCat').value;
+  const date    = document.getElementById('postDate').value;
+  const content = document.getElementById('postContent').value.trim();
+  const editId  = document.getElementById('editId').value;
+  const imgSrc  = document.getElementById('imgPreview').src;
+  const img     = imgSrc.startsWith('data:') ? imgSrc : '';
+
+  if (!title || !content || !date) { toast('⚠️ Fill Title, Date & Content!'); return; }
+
+  const posts = getPosts();
+  const post  = { id: editId || Date.now().toString(), title, cat, date, content, img };
+
+  if (editId) {
+    const idx = posts.findIndex(p => p.id === editId);
+    if (idx >= 0) posts[idx] = post;
+    toast('✅ Post updated! Click "Save posts.json" to publish.');
+  } else {
+    posts.push(post);
+    toast('✅ Post saved! Click "Save posts.json" to publish.');
+  }
+
+  setPosts(posts);
+  resetForm();
+  refreshAll();
+  showPanel('all-posts', null);
+}
+
+function editPost(id) {
+  const post = getPosts().find(p => p.id === id);
+  if (!post) return;
+  document.getElementById('editId').value      = id;
+  document.getElementById('postTitle').value   = post.title;
+  document.getElementById('postCat').value     = post.cat;
+  document.getElementById('postDate').value    = post.date;
+  document.getElementById('postContent').value = post.content;
+  document.getElementById('formTitle').textContent = 'EDIT POST';
+  if (post.img) { document.getElementById('imgPreview').src = post.img; document.getElementById('imgPreview').style.display = 'block'; }
+  showPanel('new-post', null);
+  document.querySelector('.content').scrollTo(0,0);
+}
+
+function deletePost(id) {
+  if (!confirm('Delete this post?')) return;
+  setPosts(getPosts().filter(p => p.id !== id));
+  toast('🗑️ Deleted! Click "Save posts.json" to update blog.');
+  refreshAll();
+}
+
+function resetForm() {
+  document.getElementById('editId').value      = '';
+  document.getElementById('postTitle').value   = '';
+  document.getElementById('postContent').value = '';
+  document.getElementById('postDate').valueAsDate = new Date();
+  document.getElementById('postCat').value     = 'match';
+  document.getElementById('imgPreview').src    = '';
+  document.getElementById('imgPreview').style.display = 'none';
+  document.getElementById('imgInput').value    = '';
+  document.getElementById('formTitle').textContent = 'NEW POST';
+}
+
+function previewImg(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('imgPreview').src = e.target.result;
+    document.getElementById('imgPreview').style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── DOWNLOAD posts.json ──
+function downloadJSON() {
+  const posts = getPosts();
+  const blob  = new Blob([JSON.stringify(posts, null, 2)], { type:'application/json' });
+  const a     = document.createElement('a');
+  a.href      = URL.createObjectURL(blob);
+  a.download  = 'posts.json';
+  a.click();
+  toast('✅ posts.json downloaded! Upload to GitHub now.');
+}
+
+// ── IMPORT ──
+function importJSON(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (Array.isArray(data)) {
+        setPosts(data);
+        refreshAll();
+        toast('✅ ' + data.length + ' posts imported!');
+      } else { toast('❌ Invalid posts.json file!'); }
+    } catch { toast('❌ Cannot read file!'); }
+  };
+  reader.readAsText(file);
+  input.value = '';
+}
+
+function clearAll() {
+  if (!confirm('Delete ALL posts from browser? Make sure you saved posts.json first!')) return;
+  setPosts([]);
+  refreshAll();
+  toast('🗑️ All posts cleared!');
+}
+
+// ── RENDER ──
+function renderDashboard() {
+  const posts = getPosts();
+  document.getElementById('sideCount').textContent = posts.length;
+
+  // Stats
+  document.getElementById('statsGrid').innerHTML = `
+    <div class="stat-card"><div class="stat-num">${posts.length}</div><div class="stat-lbl">Total Posts</div></div>
+    ${Object.entries(CAT).map(([k,v]) => `
+    <div class="stat-card" style="border-top-color:${v.color}">
+      <div class="stat-num">${posts.filter(p=>p.cat===k).length}</div>
+      <div class="stat-lbl">${v.icon} ${v.label}</div>
+    </div>`).join('')}`;
+
+  // Recent
+  const recent = [...posts].reverse().slice(0,5);
+  document.getElementById('recentPosts').innerHTML = recent.length === 0
+    ? '<div style="color:rgba(255,255,255,0.2);font-size:13px;padding:16px 0;">No posts yet — Click "New Post" to start!</div>'
+    : recent.map(p => {
+        const c = CAT[p.cat]||CAT.news;
+        return `<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+          <span style="font-size:18px;">${c.icon}</span>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:13px;font-weight:600;color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.title}</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.3);">${c.label} · ${p.date}</div>
+          </div>
+          <button class="action-btn edit-btn" onclick="editPost('${p.id}')">Edit</button>
+        </div>`;
+      }).join('');
+}
+
+function renderTable() {
+  const posts = [...getPosts()].reverse();
+  const tbody = document.getElementById('postsBody');
+  if (posts.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:rgba(255,255,255,0.2);padding:28px;">No posts yet</td></tr>';
+    return;
+  }
+  tbody.innerHTML = posts.map(p => {
+    const c = CAT[p.cat]||CAT.news;
+    return `<tr>
+      <td style="font-weight:600;color:var(--white);max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.title}</td>
+      <td><span class="cat-badge" style="background:${c.color};color:#fff;">${c.icon} ${c.label}</span></td>
+      <td style="color:rgba(255,255,255,0.35);font-size:12px;">${p.date}</td>
+      <td>
+        <button class="action-btn edit-btn" onclick="editPost('${p.id}')">✏️ Edit</button>
+        <button class="action-btn del-btn" onclick="deletePost('${p.id}')">🗑️ Del</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function refreshAll() { renderDashboard(); renderTable(); }
+
+function showPanel(name, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  if (btn) btn.classList.add('active');
+  if (name === 'new-post' && !document.getElementById('editId').value) resetForm();
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+if (sessionStorage.getItem('ahtor_logged') === '1') refreshAll();
+</script>
+</body>
+</html>
