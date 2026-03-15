@@ -8,533 +8,527 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   @font-face { font-family:'MiSans Khmer'; src:url('MiSansKhmer-Medium.ttf') format('truetype'); font-weight:500; }
-  :root { --green:#1B6B2F; --green2:#2E8B57; --green3:#0d4a1f; --yellow:#F4C430; --gold:#D4A017; --white:#FFFFFF; --dark:#0e1a10; --red:#C0392B; }
+  :root {
+    --green:#1B6B2F; --green3:#0d4a1f; --yellow:#F4C430; --gold:#D4A017;
+    --white:#FFFFFF; --dark:#0e1a10; --red:#c0392b; --blue:#1565C0;
+  }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'MiSans Khmer','Barlow',sans-serif; background:#080f09; color:var(--white); min-height:100vh; }
+  body { font-family:'MiSans Khmer','Barlow',sans-serif; background:var(--dark); color:var(--white); min-height:100vh; }
 
-  /* LOGIN */
-  .login-screen { position:fixed; inset:0; background:#080f09; display:flex; align-items:center; justify-content:center; z-index:999; }
-  .login-box { background:#0f1f12; border:1px solid rgba(27,107,47,0.4); padding:48px 40px; width:380px; text-align:center; }
-  .login-logo { font-family:'Bebas Neue',sans-serif; font-size:36px; letter-spacing:4px; color:var(--white); margin-bottom:4px; }
-  .login-logo span { color:var(--yellow); }
-  .login-sub { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:36px; }
-  .login-label { font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.35); display:block; text-align:left; margin-bottom:6px; }
-  .login-input { width:100%; padding:12px 16px; background:rgba(255,255,255,0.04); border:1px solid rgba(27,107,47,0.3); color:var(--white); font-size:14px; outline:none; margin-bottom:16px; transition:border-color 0.2s; }
-  .login-input:focus { border-color:var(--yellow); }
-  .login-btn { width:100%; background:var(--yellow); color:var(--dark); font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:800; letter-spacing:3px; text-transform:uppercase; border:none; cursor:pointer; padding:14px; transition:background 0.2s; }
-  .login-btn:hover { background:var(--gold); }
-  .login-error { color:#ff6b6b; font-size:12px; margin-top:10px; display:none; }
+  /* ── LOGIN ── */
+  #loginScreen {
+    min-height:100vh; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(160deg,rgba(14,26,16,0.95),rgba(27,107,47,0.3),rgba(14,26,16,0.98));
+    background-color:var(--green3);
+  }
+  .login-box {
+    background:rgba(14,26,16,0.9); border:1px solid rgba(27,107,47,0.4);
+    border-top:3px solid var(--yellow); padding:48px 40px; width:100%; max-width:400px;
+  }
+  .login-box .logo { font-family:'Bebas Neue',sans-serif; font-size:32px; letter-spacing:3px; color:var(--white); margin-bottom:4px; }
+  .login-box .logo span { color:var(--yellow); }
+  .login-box .sub { font-size:11px; letter-spacing:3px; color:rgba(255,255,255,0.35); text-transform:uppercase; margin-bottom:36px; }
+  .login-err { background:rgba(192,57,43,0.15); border:1px solid rgba(192,57,43,0.4); border-left:3px solid var(--red); padding:10px 14px; font-size:13px; color:#e74c3c; margin-bottom:20px; display:none; }
 
-  /* ADMIN */
-  .admin-screen { display:none; }
-  .admin-screen.show { display:block; }
+  /* ── MAIN ── */
+  #adminScreen { display:none; min-height:100vh; }
 
-  .topbar { background:#0f1f12; border-bottom:2px solid var(--green); padding:0 32px; height:60px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; }
-  .topbar-logo { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:3px; color:var(--white); }
-  .topbar-logo span { color:var(--yellow); }
-  .topbar-right { display:flex; gap:10px; align-items:center; }
-  .topbar-btn { font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:7px 14px; cursor:pointer; border:1px solid rgba(27,107,47,0.4); background:transparent; color:rgba(255,255,255,0.6); transition:all 0.2s; text-decoration:none; }
-  .topbar-btn:hover { background:var(--green); color:var(--white); }
-  .topbar-btn.yellow { background:var(--yellow); color:var(--dark); border-color:var(--yellow); }
-  .topbar-btn.yellow:hover { background:var(--gold); }
-  .topbar-btn.danger { border-color:rgba(192,57,43,0.4); color:rgba(255,100,80,0.8); }
-  .topbar-btn.danger:hover { background:var(--red); color:var(--white); border-color:var(--red); }
+  nav {
+    position:sticky; top:0; z-index:100;
+    background:rgba(14,26,16,0.97); backdrop-filter:blur(12px);
+    border-bottom:2px solid var(--green);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 32px; height:60px;
+  }
+  .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:3px; color:var(--white); }
+  .nav-logo span { color:var(--yellow); }
+  .nav-right { display:flex; align-items:center; gap:16px; }
+  .nav-badge { background:rgba(27,107,47,0.3); border:1px solid rgba(27,107,47,0.5); color:var(--yellow); font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:4px 12px; }
+  .btn-logout { background:transparent; border:1px solid rgba(192,57,43,0.4); color:rgba(255,255,255,0.4); font-family:'MiSans Khmer',sans-serif; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:6px 14px; cursor:pointer; transition:all 0.2s; }
+  .btn-logout:hover { border-color:var(--red); color:var(--red); }
 
-  .admin-layout { display:grid; grid-template-columns:260px 1fr; min-height:calc(100vh - 60px); }
+  .admin-wrap { display:grid; grid-template-columns:1fr 420px; gap:0; min-height:calc(100vh - 60px); }
 
-  .sidebar { background:#0a1a0c; border-right:1px solid rgba(27,107,47,0.2); padding:20px 0; }
-  .sidebar-label { font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.2); margin-bottom:8px; padding:0 20px; }
-  .sidebar-btn { width:100%; display:flex; align-items:center; gap:12px; padding:11px 20px; background:transparent; border:none; color:rgba(255,255,255,0.5); font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:600; letter-spacing:1px; cursor:pointer; transition:all 0.2s; text-align:left; margin-bottom:2px; }
-  .sidebar-btn:hover, .sidebar-btn.active { background:rgba(27,107,47,0.2); color:var(--white); border-left:3px solid var(--yellow); }
-  .badge { margin-left:auto; background:var(--green); color:var(--white); font-size:10px; font-weight:800; padding:2px 7px; border-radius:10px; }
+  /* ── FORM PANEL ── */
+  .form-panel { padding:32px; border-right:1px solid rgba(27,107,47,0.15); }
+  .panel-title { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:2px; color:var(--white); margin-bottom:4px; }
+  .panel-sub { font-size:11px; color:rgba(255,255,255,0.3); letter-spacing:2px; text-transform:uppercase; margin-bottom:28px; }
 
-  .content { padding:28px; overflow-y:auto; }
-  .panel { display:none; }
-  .panel.active { display:block; }
-  .panel-title { font-family:'Bebas Neue',sans-serif; font-size:30px; letter-spacing:2px; color:var(--white); margin-bottom:20px; }
+  .form-row { margin-bottom:20px; }
+  .form-row label { display:block; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:8px; }
+  .form-row input,
+  .form-row select,
+  .form-row textarea {
+    width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(27,107,47,0.3);
+    border-radius:0; color:var(--white); font-family:'MiSans Khmer','Barlow',sans-serif;
+    font-size:14px; padding:12px 14px; outline:none;
+    transition:border-color 0.2s, background 0.2s;
+  }
+  .form-row input:focus,
+  .form-row select:focus,
+  .form-row textarea:focus { border-color:var(--yellow); background:rgba(244,196,48,0.04); }
+  .form-row textarea { resize:vertical; min-height:160px; line-height:1.6; }
+  .form-row select option { background:#0e1a10; }
 
-  /* PUBLISH BANNER */
-  .publish-banner { background:linear-gradient(135deg,rgba(244,196,48,0.15),rgba(27,107,47,0.15)); border:1px solid rgba(244,196,48,0.3); padding:20px 24px; margin-bottom:24px; display:flex; align-items:center; gap:16px; }
-  .publish-banner-icon { font-size:28px; }
-  .publish-banner-text { flex:1; }
-  .publish-banner-title { font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700; color:var(--yellow); margin-bottom:4px; letter-spacing:1px; }
-  .publish-banner-desc { font-size:12px; color:rgba(255,255,255,0.5); line-height:1.5; }
-  .publish-btn { background:var(--yellow); color:var(--dark); font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:800; letter-spacing:2px; text-transform:uppercase; border:none; cursor:pointer; padding:10px 20px; white-space:nowrap; transition:background 0.2s; }
-  .publish-btn:hover { background:var(--gold); }
+  .form-grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
 
-  .form-card { background:#0f1f12; border:1px solid rgba(27,107,47,0.25); padding:28px; margin-bottom:20px; }
-  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-  .form-full { grid-column:1/-1; }
-  .form-group { margin-bottom:14px; }
-  .form-label { font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.35); display:block; margin-bottom:6px; }
-  .form-input, .form-select, .form-textarea { width:100%; padding:11px 14px; background:rgba(255,255,255,0.04); border:1px solid rgba(27,107,47,0.3); color:var(--white); font-family:'MiSans Khmer','Barlow',sans-serif; font-size:13px; outline:none; transition:border-color 0.2s; }
-  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color:var(--yellow); }
-  .form-select option { background:#0f1f12; }
-  .form-textarea { height:150px; resize:vertical; }
+  /* Image upload */
+  .img-upload-zone {
+    border:2px dashed rgba(27,107,47,0.35); padding:24px; text-align:center;
+    cursor:pointer; transition:border-color 0.2s, background 0.2s;
+    position:relative;
+  }
+  .img-upload-zone:hover, .img-upload-zone.dragover { border-color:var(--yellow); background:rgba(244,196,48,0.04); }
+  .img-upload-zone input { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; }
+  .img-upload-icon { font-size:32px; margin-bottom:8px; opacity:0.5; }
+  .img-upload-zone p { font-size:12px; color:rgba(255,255,255,0.35); }
+  .img-upload-zone p strong { color:var(--yellow); }
+  #imgPreview { width:100%; max-height:180px; object-fit:cover; margin-top:12px; display:none; }
 
-  .img-upload { border:2px dashed rgba(27,107,47,0.4); padding:20px; text-align:center; cursor:pointer; transition:border-color 0.2s; }
-  .img-upload:hover { border-color:var(--yellow); }
-  .img-preview { width:100%; max-height:180px; object-fit:cover; margin-top:10px; display:none; border:1px solid rgba(27,107,47,0.3); }
+  /* Progress */
+  .upload-progress { margin-top:10px; display:none; }
+  .progress-bar { height:3px; background:rgba(27,107,47,0.2); border-radius:2px; overflow:hidden; }
+  .progress-fill { height:100%; background:var(--yellow); width:0%; transition:width 0.3s; }
+  .progress-label { font-size:11px; color:rgba(255,255,255,0.35); margin-top:4px; }
 
-  .btn-row { display:flex; gap:10px; margin-top:8px; flex-wrap:wrap; }
-  .submit-btn { background:var(--yellow); color:var(--dark); font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:800; letter-spacing:2px; text-transform:uppercase; border:none; cursor:pointer; padding:12px 24px; transition:background 0.2s; }
-  .submit-btn:hover { background:var(--gold); }
-  .cancel-btn { background:transparent; color:rgba(255,255,255,0.4); font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; border:1px solid rgba(255,255,255,0.15); cursor:pointer; padding:11px 20px; transition:all 0.2s; }
-  .cancel-btn:hover { color:var(--white); border-color:rgba(255,255,255,0.3); }
+  /* Submit button */
+  .btn-submit {
+    width:100%; background:var(--yellow); color:var(--dark);
+    font-family:'MiSans Khmer',sans-serif; font-size:14px; font-weight:800;
+    letter-spacing:2px; text-transform:uppercase; border:none; cursor:pointer;
+    padding:16px; transition:background 0.2s, transform 0.15s; margin-top:8px;
+  }
+  .btn-submit:hover:not(:disabled) { background:var(--gold); transform:translateY(-1px); }
+  .btn-submit:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
 
-  /* TABLE */
-  .posts-table { width:100%; border-collapse:collapse; }
-  .posts-table th { font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.3); padding:10px 14px; text-align:left; border-bottom:1px solid rgba(255,255,255,0.06); }
-  .posts-table td { padding:12px 14px; border-bottom:1px solid rgba(255,255,255,0.04); font-size:13px; vertical-align:middle; }
-  .posts-table tr:hover td { background:rgba(27,107,47,0.07); }
-  .cat-badge { font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; padding:3px 9px; }
-  .action-btn { font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; padding:5px 11px; cursor:pointer; border:none; transition:all 0.15s; margin-right:4px; }
-  .edit-btn { background:rgba(27,107,47,0.3); color:var(--yellow); }
-  .edit-btn:hover { background:var(--green); color:var(--white); }
-  .del-btn { background:rgba(192,57,43,0.2); color:#ff8a80; }
-  .del-btn:hover { background:var(--red); color:var(--white); }
+  .form-msg { margin-top:14px; padding:12px 16px; font-size:13px; border-left:3px solid; display:none; }
+  .form-msg.success { background:rgba(27,107,47,0.15); border-color:var(--green); color:#4caf50; }
+  .form-msg.error { background:rgba(192,57,43,0.15); border-color:var(--red); color:#e74c3c; }
 
-  /* STATS */
-  .stats-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:14px; margin-bottom:24px; }
-  .stat-card { background:#0f1f12; border:1px solid rgba(27,107,47,0.2); border-top:3px solid var(--green); padding:18px; }
-  .stat-num { font-family:'Bebas Neue',sans-serif; font-size:38px; color:var(--yellow); line-height:1; }
-  .stat-lbl { font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-top:4px; }
+  /* ── POSTS PANEL ── */
+  .posts-panel { background:#080f09; padding:24px; overflow-y:auto; max-height:calc(100vh - 60px); }
+  .posts-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
+  .posts-count { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:2px; color:var(--white); }
+  .posts-count span { color:var(--yellow); }
+  .post-search { background:rgba(255,255,255,0.04); border:1px solid rgba(27,107,47,0.25); color:var(--white); font-size:12px; padding:7px 12px; outline:none; width:160px; }
+  .post-search:focus { border-color:rgba(244,196,48,0.4); }
 
-  /* HOW TO PUBLISH */
-  .steps-box { background:#0f1f12; border:1px solid rgba(244,196,48,0.2); padding:24px; margin-bottom:20px; }
-  .steps-box-title { font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; color:var(--yellow); margin-bottom:16px; letter-spacing:2px; text-transform:uppercase; }
-  .step-item { display:flex; gap:14px; align-items:flex-start; margin-bottom:14px; }
-  .step-num { width:28px; height:28px; background:var(--green); color:var(--white); font-family:'Bebas Neue',sans-serif; font-size:16px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-  .step-text { font-size:13px; color:rgba(255,255,255,0.6); line-height:1.5; }
-  .step-text strong { color:var(--white); }
+  /* Post item */
+  .post-item {
+    background:rgba(27,107,47,0.06); border:1px solid rgba(27,107,47,0.15);
+    border-left:3px solid var(--green); padding:14px; margin-bottom:10px;
+    transition:border-color 0.2s;
+  }
+  .post-item:hover { border-left-color:var(--yellow); }
+  .pi-top { display:flex; align-items:flex-start; justify-content:space-between; gap:8px; margin-bottom:6px; }
+  .pi-title { font-size:13px; font-weight:600; color:var(--white); line-height:1.3; flex:1; }
+  .pi-actions { display:flex; gap:6px; flex-shrink:0; }
+  .pi-btn { background:none; border:1px solid; font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:4px 8px; cursor:pointer; transition:all 0.2s; }
+  .pi-btn.edit { border-color:rgba(27,107,47,0.4); color:rgba(255,255,255,0.4); }
+  .pi-btn.edit:hover { border-color:var(--green); color:var(--white); }
+  .pi-btn.del { border-color:rgba(192,57,43,0.3); color:rgba(192,57,43,0.5); }
+  .pi-btn.del:hover { border-color:var(--red); color:var(--red); }
+  .pi-meta { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .pi-cat { font-size:9px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; padding:2px 7px; }
+  .cat-match    { background:#C0392B22; color:#e57373; border:1px solid #C0392B44; }
+  .cat-schedule { background:#1565C022; color:#64B5F6; border:1px solid #1565C044; }
+  .cat-news     { background:#1B6B2F22; color:#81C784; border:1px solid #1B6B2F44; }
+  .cat-training { background:#6A1B9A22; color:#CE93D8; border:1px solid #6A1B9A44; }
+  .cat-announce { background:#F4C43022; color:#FFD54F; border:1px solid #F4C43044; }
+  .cat-event    { background:#E6510022; color:#FFB74D; border:1px solid #E6510044; }
+  .pi-date { font-size:10px; color:rgba(255,255,255,0.25); }
+  .pi-excerpt { font-size:11px; color:rgba(255,255,255,0.3); line-height:1.5; margin-top:6px; }
 
-  .toast { position:fixed; bottom:24px; right:24px; z-index:9999; background:var(--green); color:var(--white); font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; letter-spacing:1px; padding:14px 22px; border-left:4px solid var(--yellow); transform:translateY(60px); opacity:0; transition:all 0.3s; }
-  .toast.show { transform:translateY(0); opacity:1; }
+  .posts-empty { text-align:center; padding:48px 20px; }
+  .posts-empty .ei { font-size:48px; opacity:0.2; margin-bottom:12px; }
+  .posts-empty p { font-size:12px; color:rgba(255,255,255,0.2); }
 
-  @media(max-width:768px) {
-    .admin-layout { grid-template-columns:1fr; }
-    .sidebar { display:none; }
-    .form-grid { grid-template-columns:1fr; }
+  .posts-loading { text-align:center; padding:48px; }
+  .spinner { width:32px; height:32px; border:2px solid rgba(27,107,47,0.3); border-top-color:var(--green); border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 12px; }
+  @keyframes spin { to{transform:rotate(360deg)} }
+
+  /* Shared input style */
+  input[type="text"], input[type="password"], input[type="date"] {
+    -webkit-appearance:none; appearance:none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px) {
+    .admin-wrap { grid-template-columns:1fr; }
+    .form-panel { border-right:none; border-bottom:1px solid rgba(27,107,47,0.15); }
+    .posts-panel { max-height:none; }
+  }
+  @media(max-width:480px) {
+    nav { padding:0 16px; }
+    .form-panel { padding:20px 16px; }
+    .form-grid2 { grid-template-columns:1fr; }
+    .posts-panel { padding:16px; }
   }
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div class="login-screen" id="loginScreen">
+<!-- ══════════════════ LOGIN SCREEN ══════════════════ -->
+<div id="loginScreen">
   <div class="login-box">
-    <div class="login-logo">AHTOR <span>FC</span></div>
-    <div class="login-sub">Admin Panel</div>
-    <label class="login-label">Username</label>
-    <input class="login-input" type="text" id="loginUser" placeholder="admin" onkeydown="if(event.key==='Enter')doLogin()">
-    <label class="login-label">Password</label>
-    <input class="login-input" type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
-    <button class="login-btn" onclick="doLogin()">🔐 LOGIN</button>
-    <div class="login-error" id="loginError">❌ Wrong username or password!</div>
-    <div style="margin-top:16px;font-size:11px;color:rgba(255,255,255,0.2);">Default: admin / ahtor2026</div>
+    <div class="logo">AHTOR <span>FC</span></div>
+    <div class="sub">Admin Panel · Restricted Access</div>
+    <div class="login-err" id="loginErr">❌ Password incorrect. Try again.</div>
+    <div class="form-row">
+      <label>Password</label>
+      <input type="password" id="pwInput" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="btn-submit" onclick="doLogin()" style="margin-top:0">Enter Admin Panel →</button>
   </div>
 </div>
 
-<!-- ADMIN -->
-<div class="admin-screen" id="adminScreen">
-  <div class="topbar">
-    <div class="topbar-logo">AHTOR <span>FC</span> — Admin</div>
-    <div class="topbar-right">
-      <button class="topbar-btn yellow" onclick="downloadJSON()">⬇️ Save posts.json</button>
-      <a href="blog.html" target="_blank" class="topbar-btn">🌐 Blog</a>
-      <a href="index.html" target="_blank" class="topbar-btn">🏠 Home</a>
-      <button class="topbar-btn danger" onclick="doLogout()">🔒 Logout</button>
+<!-- ══════════════════ ADMIN SCREEN ══════════════════ -->
+<div id="adminScreen">
+  <nav>
+    <div class="nav-logo">AHTOR <span>FC</span> <span style="font-size:14px;opacity:0.4;letter-spacing:1px;">· ADMIN</span></div>
+    <div class="nav-right">
+      <div class="nav-badge">✓ Logged In</div>
+      <button class="btn-logout" onclick="doLogout()">Logout</button>
     </div>
-  </div>
+  </nav>
 
-  <div class="admin-layout">
-    <div class="sidebar">
-      <div style="padding:16px 20px 8px;">
-        <div class="sidebar-label">Menu</div>
-        <button class="sidebar-btn active" onclick="showPanel('dashboard',this)">📊 Dashboard</button>
-        <button class="sidebar-btn" onclick="showPanel('new-post',this)">✏️ New Post <span class="badge" id="sideCount">0</span></button>
-        <button class="sidebar-btn" onclick="showPanel('all-posts',this)">📋 All Posts</button>
+  <div class="admin-wrap">
+    <!-- LEFT: Post Form -->
+    <div class="form-panel">
+      <div class="panel-title" id="formTitle">NEW POST</div>
+      <div class="panel-sub" id="formSub">Create a new blog entry</div>
+
+      <input type="hidden" id="editId">
+
+      <div class="form-row">
+        <label>Post Title *</label>
+        <input type="text" id="fTitle" placeholder="e.g. AHTOR FC vs Team X — 3:1 Win!">
       </div>
-      <div style="padding:8px 20px;">
-        <div class="sidebar-label">Data</div>
-        <button class="sidebar-btn" onclick="showPanel('publish',this)">🚀 How to Publish</button>
-        <button class="sidebar-btn" onclick="showPanel('import',this)">📂 Import Posts</button>
-        <button class="sidebar-btn" onclick="showPanel('password',this)">🔑 Password</button>
+
+      <div class="form-grid2">
+        <div class="form-row">
+          <label>Category *</label>
+          <select id="fCat">
+            <option value="match">⚽ Match Results</option>
+            <option value="schedule">📅 Schedule</option>
+            <option value="news" selected>📰 News</option>
+            <option value="training">🏋️ Training</option>
+            <option value="announce">📢 Announcement</option>
+            <option value="event">🏆 Event</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Date *</label>
+          <input type="date" id="fDate">
+        </div>
       </div>
+
+      <div class="form-row">
+        <label>Content *</label>
+        <textarea id="fContent" placeholder="Write your post here... &#10;&#10;You can write in Khmer or English.&#10;Line breaks are preserved."></textarea>
+      </div>
+
+      <div class="form-row">
+        <label>Image (optional)</label>
+        <div class="img-upload-zone" id="uploadZone">
+          <input type="file" id="fImg" accept="image/*" onchange="previewImg(this)">
+          <div class="img-upload-icon">📷</div>
+          <p><strong>Click or drag</strong> to upload image</p>
+          <p>JPG, PNG, WebP · Max 5MB</p>
+          <img id="imgPreview">
+        </div>
+        <div class="upload-progress" id="uploadProgress">
+          <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+          <div class="progress-label" id="progressLabel">Uploading...</div>
+        </div>
+      </div>
+
+      <button class="btn-submit" id="submitBtn" onclick="submitPost()">
+        <span id="submitLabel">✚ Publish Post</span>
+      </button>
+      <button id="cancelEdit" style="display:none;width:100%;margin-top:8px;background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);padding:12px;cursor:pointer;font-family:'MiSans Khmer',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;" onclick="cancelEditMode()">✕ Cancel Edit</button>
+
+      <div class="form-msg" id="formMsg"></div>
     </div>
 
-    <div class="content">
-
-      <!-- DASHBOARD -->
-      <div class="panel active" id="panel-dashboard">
-        <div class="panel-title">DASHBOARD</div>
-        <div class="publish-banner">
-          <div class="publish-banner-icon">🚀</div>
-          <div class="publish-banner-text">
-            <div class="publish-banner-title">Ready to Publish?</div>
-            <div class="publish-banner-desc">បន្ទាប់ពី Post ចប់ → Click "Save posts.json" → Upload ទៅ GitHub → Blog Update ភ្លាម!</div>
-          </div>
-          <button class="publish-btn" onclick="downloadJSON()">⬇️ Save posts.json</button>
-        </div>
-        <div class="stats-grid" id="statsGrid"></div>
-        <div class="form-card">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--yellow);margin-bottom:14px;letter-spacing:1px;text-transform:uppercase;">Recent Posts</div>
-          <div id="recentPosts"></div>
-        </div>
+    <!-- RIGHT: Posts List -->
+    <div class="posts-panel">
+      <div class="posts-header">
+        <div class="posts-count">Posts <span id="postsCount">—</span></div>
+        <input class="post-search" type="text" placeholder="Search..." oninput="searchPosts(this.value)">
       </div>
-
-      <!-- NEW POST -->
-      <div class="panel" id="panel-new-post">
-        <div class="panel-title" id="formTitle">NEW POST</div>
-        <div class="form-card">
-          <input type="hidden" id="editId">
-          <div class="form-grid">
-            <div class="form-group form-full">
-              <label class="form-label">Title / ចំណងជើង *</label>
-              <input class="form-input" type="text" id="postTitle" placeholder="e.g. AHTOR FC Win 3-0 vs Team B">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Category *</label>
-              <select class="form-select" id="postCat">
-                <option value="match">⚽ Match Results</option>
-                <option value="schedule">📅 Match Schedule</option>
-                <option value="news">📰 News & Updates</option>
-                <option value="training">🏋️ Training Photos</option>
-                <option value="announce">📢 Club Announcement</option>
-                <option value="event">🏆 Event / Tournament</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Date *</label>
-              <input class="form-input" type="date" id="postDate">
-            </div>
-            <div class="form-group form-full">
-              <label class="form-label">Content / មាតិកា *</label>
-              <textarea class="form-textarea" id="postContent" placeholder="Write your post content here...&#10;&#10;You can write in Khmer or English."></textarea>
-            </div>
-            <div class="form-group form-full">
-              <label class="form-label">Image (Optional)</label>
-              <div class="img-upload" onclick="document.getElementById('imgInput').click()">
-                <div style="font-size:28px;margin-bottom:6px;">🖼️</div>
-                <div style="font-size:12px;color:rgba(255,255,255,0.35);">Click to upload image (JPG/PNG) — Max 500KB recommended</div>
-                <img id="imgPreview" class="img-preview" alt="Preview">
-              </div>
-              <input type="file" id="imgInput" accept="image/*" style="display:none" onchange="previewImg(this)">
-            </div>
-          </div>
-          <div class="btn-row">
-            <button class="submit-btn" onclick="savePost()">💾 SAVE POST</button>
-            <button class="cancel-btn" onclick="resetForm()">Cancel</button>
-          </div>
-          <div style="margin-top:14px;padding:12px 16px;background:rgba(244,196,48,0.06);border:1px solid rgba(244,196,48,0.2);font-size:12px;color:rgba(255,255,255,0.45);line-height:1.6;">
-            ⚠️ <strong style="color:var(--yellow);">After saving</strong> → Click <strong style="color:var(--yellow);">"Save posts.json"</strong> button at top → Upload to GitHub → Blog Live!
-          </div>
-        </div>
+      <div id="postsList">
+        <div class="posts-loading"><div class="spinner"></div><p style="font-size:12px;color:rgba(255,255,255,0.2);">Loading posts...</p></div>
       </div>
-
-      <!-- ALL POSTS -->
-      <div class="panel" id="panel-all-posts">
-        <div class="panel-title">ALL POSTS</div>
-        <div class="form-card" style="padding:0;overflow:hidden;">
-          <table class="posts-table">
-            <thead><tr><th>Title</th><th>Category</th><th>Date</th><th>Actions</th></tr></thead>
-            <tbody id="postsBody"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- HOW TO PUBLISH -->
-      <div class="panel" id="panel-publish">
-        <div class="panel-title">HOW TO PUBLISH</div>
-        <div class="steps-box">
-          <div class="steps-box-title">📋 Workflow — Post Blog ហើយ Publish ទៅ Website</div>
-          <div class="step-item"><div class="step-num">1</div><div class="step-text"><strong>Login</strong> ទៅ admin.html → <strong>New Post</strong> → Fill Title, Category, Date, Content, Image → Click <strong>"Save Post"</strong></div></div>
-          <div class="step-item"><div class="step-num">2</div><div class="step-text">Click button <strong style="color:var(--yellow);">"⬇️ Save posts.json"</strong> នៅខាងលើ → File <strong>posts.json</strong> Download ទៅ Computer</div></div>
-          <div class="step-item"><div class="step-num">3</div><div class="step-text">ទៅ <strong>GitHub</strong> → Repository <strong>ahtorfc</strong> → <strong>Upload files</strong> → Upload <strong>posts.json</strong> → <strong>Commit changes</strong></div></div>
-          <div class="step-item"><div class="step-num">4</div><div class="step-text">រង់ចាំ <strong>2-3 នាទី</strong> → ទៅ <strong>blog.html</strong> → <strong>Refresh</strong> → Post បង្ហាញ! ✅</div></div>
-        </div>
-        <div class="steps-box" style="border-color:rgba(192,57,43,0.2);">
-          <div class="steps-box-title" style="color:#ff8a80;">⚠️ Important Notes</div>
-          <div class="step-item"><div class="step-num" style="background:var(--red);">!</div><div class="step-text">Posts រក្សាក្នុង <strong>Browser localStorage</strong> — <strong>Export posts.json</strong> ជានិច្ចមុន Clear Browser!</div></div>
-          <div class="step-item"><div class="step-num" style="background:var(--red));">!</div><div class="step-text">Image ធំពេក → Website Load យឺត — Compress Image ក្នុង <strong>squoosh.app</strong> មុន Upload!</div></div>
-        </div>
-      </div>
-
-      <!-- IMPORT -->
-      <div class="panel" id="panel-import">
-        <div class="panel-title">IMPORT POSTS</div>
-        <div class="form-card">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--yellow);margin-bottom:8px;">📂 Import from posts.json</div>
-          <div style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.6;margin-bottom:16px;">Import posts.json ពី GitHub ឬ Backup ដែលធ្វើពីមុន</div>
-          <button class="submit-btn" onclick="document.getElementById('importInput').click()">⬆️ Import posts.json</button>
-          <input type="file" id="importInput" accept=".json" style="display:none" onchange="importJSON(this)">
-        </div>
-        <div class="form-card" style="border-color:rgba(192,57,43,0.2);">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:#ff8a80;margin-bottom:8px;">🗑️ Clear All Posts</div>
-          <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:14px;">លុប Posts ទាំងអស់ក្នុង Browser — Export posts.json ជាមុន!</div>
-          <button class="submit-btn" style="background:var(--red);" onclick="clearAll()">🗑️ Clear All</button>
-        </div>
-      </div>
-
-      <!-- PASSWORD -->
-      <div class="panel" id="panel-password">
-        <div class="panel-title">CHANGE PASSWORD</div>
-        <div class="form-card" style="max-width:380px;">
-          <div class="form-group">
-            <label class="form-label">Current Password</label>
-            <input class="form-input" type="password" id="curPass" placeholder="Current password">
-          </div>
-          <div class="form-group">
-            <label class="form-label">New Password</label>
-            <input class="form-input" type="password" id="newPass" placeholder="Min 6 characters">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Confirm New Password</label>
-            <input class="form-input" type="password" id="conPass" placeholder="Repeat new password">
-          </div>
-          <button class="submit-btn" onclick="changePassword()">🔑 CHANGE PASSWORD</button>
-        </div>
-      </div>
-
     </div>
   </div>
 </div>
 
-<div class="toast" id="toast"></div>
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, orderBy, query, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-<script>
-// ── AUTH ──
-const DEF_USER = 'admin';
-const DEF_PASS = 'ahtor2026';
-function getCreds() { return { user: localStorage.getItem('ahtor_user')||DEF_USER, pass: localStorage.getItem('ahtor_pass')||DEF_PASS }; }
+// ══════════════════════════════════════════════════════
+//  🔥 PASTE YOUR FIREBASE CONFIG HERE
+// ══════════════════════════════════════════════════════
+const firebaseConfig = {
+  apiKey: "AIzaSyCV9ytKMwWRX6_kWpmg3S_OflqQlcmDum0",
+  authDomain: "ahtor-fc.firebaseapp.com",
+  projectId: "ahtor-fc",
+  storageBucket: "ahtor-fc.firebasestorage.app",
+  messagingSenderId: "250669078367",
+  appId: "1:250669078367:web:7dd361df438afeb3a448ea"
+};
+// ══════════════════════════════════════════════════════
 
-function doLogin() {
-  const u = document.getElementById('loginUser').value.trim();
-  const p = document.getElementById('loginPass').value;
-  const c = getCreds();
-  if (u === c.user && p === c.pass) {
-    sessionStorage.setItem('ahtor_logged','1');
+const ADMIN_PASSWORD = "ahtor2026"; // 🔑 Change this!
+
+// ══════════════════════════════════════════════════════
+//  ☁️ CLOUDINARY — FREE image hosting (25GB)
+//  1. cloudinary.com → Sign up free
+//  2. Dashboard → copy your "Cloud name"
+//  3. Settings → Upload → Add upload preset → Unsigned → Save
+// ══════════════════════════════════════════════════════
+const CLOUDINARY_CLOUD  = "dhtytdnid";
+const CLOUDINARY_PRESET = "ahtor_blog";
+// ══════════════════════════════════════════════════════
+
+const app = initializeApp(firebaseConfig);
+const db  = getFirestore(app);
+
+let allPostsCache = [];
+let currentImgUrl = null;
+
+// ── LOGIN ──
+window.doLogin = function() {
+  const pw = document.getElementById('pwInput').value;
+  if (pw === ADMIN_PASSWORD) {
     document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('adminScreen').classList.add('show');
-    refreshAll();
+    document.getElementById('adminScreen').style.display = 'block';
+    document.getElementById('fDate').value = new Date().toISOString().split('T')[0];
+    loadPosts();
   } else {
-    document.getElementById('loginError').style.display = 'block';
+    document.getElementById('loginErr').style.display = 'block';
+    document.getElementById('pwInput').value = '';
+    document.getElementById('pwInput').focus();
   }
-}
-
-function doLogout() { sessionStorage.removeItem('ahtor_logged'); location.reload(); }
-
-function changePassword() {
-  const cur = document.getElementById('curPass').value;
-  const nw  = document.getElementById('newPass').value;
-  const con = document.getElementById('conPass').value;
-  if (cur !== getCreds().pass) { toast('❌ Wrong current password!'); return; }
-  if (nw !== con)               { toast('❌ Passwords do not match!'); return; }
-  if (nw.length < 6)            { toast('❌ Min 6 characters!'); return; }
-  localStorage.setItem('ahtor_pass', nw);
-  toast('✅ Password changed!');
-  ['curPass','newPass','conPass'].forEach(id => document.getElementById(id).value = '');
-}
-
-if (sessionStorage.getItem('ahtor_logged') === '1') {
-  document.getElementById('loginScreen').style.display = 'none';
-  document.getElementById('adminScreen').classList.add('show');
-}
-
-// ── POSTS ──
-const CAT = {
-  match:    { label:'Match Results', cls:'cat-match',    icon:'⚽', color:'#C0392B' },
-  schedule: { label:'Schedule',      cls:'cat-schedule', icon:'📅', color:'#1565C0' },
-  news:     { label:'News',          cls:'cat-news',     icon:'📰', color:'#1B6B2F' },
-  training: { label:'Training',      cls:'cat-training', icon:'🏋️', color:'#6A1B9A' },
-  announce: { label:'Announcement',  cls:'cat-announce', icon:'📢', color:'#D4A017' },
-  event:    { label:'Event',         cls:'cat-event',    icon:'🏆', color:'#E65100' },
 };
 
-function getPosts() { return JSON.parse(localStorage.getItem('ahtor_posts')||'[]'); }
-function setPosts(p) { localStorage.setItem('ahtor_posts', JSON.stringify(p)); }
+window.doLogout = function() {
+  document.getElementById('adminScreen').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('pwInput').value = '';
+};
 
-document.getElementById('postDate').valueAsDate = new Date();
+// ── IMAGE PREVIEW ──
+window.previewImg = function(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const preview = document.getElementById('imgPreview');
+  preview.src = URL.createObjectURL(file);
+  preview.style.display = 'block';
+};
 
-function savePost() {
-  const title   = document.getElementById('postTitle').value.trim();
-  const cat     = document.getElementById('postCat').value;
-  const date    = document.getElementById('postDate').value;
-  const content = document.getElementById('postContent').value.trim();
-  const editId  = document.getElementById('editId').value;
-  const imgSrc  = document.getElementById('imgPreview').src;
-  const img     = imgSrc.startsWith('data:') ? imgSrc : '';
-
-  if (!title || !content || !date) { toast('⚠️ Fill Title, Date & Content!'); return; }
-
-  const posts = getPosts();
-  const post  = { id: editId || Date.now().toString(), title, cat, date, content, img };
-
-  if (editId) {
-    const idx = posts.findIndex(p => p.id === editId);
-    if (idx >= 0) posts[idx] = post;
-    toast('✅ Post updated! Click "Save posts.json" to publish.');
-  } else {
-    posts.push(post);
-    toast('✅ Post saved! Click "Save posts.json" to publish.');
+// Drag & drop
+const zone = document.getElementById('uploadZone');
+zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+zone.addEventListener('drop', e => {
+  e.preventDefault(); zone.classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) {
+    document.getElementById('fImg').files = e.dataTransfer.files;
+    previewImg(document.getElementById('fImg'));
   }
+});
 
-  setPosts(posts);
-  resetForm();
-  refreshAll();
-  showPanel('all-posts', null);
+// ── UPLOAD IMAGE via Cloudinary ──
+async function uploadImage(file) {
+  document.getElementById('uploadProgress').style.display = 'block';
+  document.getElementById('progressFill').style.width = '30%';
+  document.getElementById('progressLabel').textContent = 'Uploading to Cloudinary...';
+
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', CLOUDINARY_PRESET);
+  formData.append('folder', 'ahtor-blog');
+
+  const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, {
+    method: 'POST',
+    body: formData
+  });
+
+  document.getElementById('progressFill').style.width = '90%';
+
+  if (!res.ok) throw new Error('Cloudinary upload failed');
+  const data = await res.json();
+
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('progressLabel').textContent = 'Upload complete!';
+
+  return data.secure_url;
 }
 
-function editPost(id) {
-  const post = getPosts().find(p => p.id === id);
-  if (!post) return;
-  document.getElementById('editId').value      = id;
-  document.getElementById('postTitle').value   = post.title;
-  document.getElementById('postCat').value     = post.cat;
-  document.getElementById('postDate').value    = post.date;
-  document.getElementById('postContent').value = post.content;
-  document.getElementById('formTitle').textContent = 'EDIT POST';
-  if (post.img) { document.getElementById('imgPreview').src = post.img; document.getElementById('imgPreview').style.display = 'block'; }
-  showPanel('new-post', null);
-  document.querySelector('.content').scrollTo(0,0);
-}
+// ── SUBMIT POST ──
+window.submitPost = async function() {
+  const title   = document.getElementById('fTitle').value.trim();
+  const cat     = document.getElementById('fCat').value;
+  const date    = document.getElementById('fDate').value;
+  const content = document.getElementById('fContent').value.trim();
+  const imgFile = document.getElementById('fImg').files[0];
+  const editId  = document.getElementById('editId').value;
 
-function deletePost(id) {
-  if (!confirm('Delete this post?')) return;
-  setPosts(getPosts().filter(p => p.id !== id));
-  toast('🗑️ Deleted! Click "Save posts.json" to update blog.');
-  refreshAll();
-}
-
-function resetForm() {
-  document.getElementById('editId').value      = '';
-  document.getElementById('postTitle').value   = '';
-  document.getElementById('postContent').value = '';
-  document.getElementById('postDate').valueAsDate = new Date();
-  document.getElementById('postCat').value     = 'match';
-  document.getElementById('imgPreview').src    = '';
-  document.getElementById('imgPreview').style.display = 'none';
-  document.getElementById('imgInput').value    = '';
-  document.getElementById('formTitle').textContent = 'NEW POST';
-}
-
-function previewImg(input) {
-  const file = input.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    document.getElementById('imgPreview').src = e.target.result;
-    document.getElementById('imgPreview').style.display = 'block';
-  };
-  reader.readAsDataURL(file);
-}
-
-// ── DOWNLOAD posts.json ──
-function downloadJSON() {
-  const posts = getPosts();
-  const blob  = new Blob([JSON.stringify(posts, null, 2)], { type:'application/json' });
-  const a     = document.createElement('a');
-  a.href      = URL.createObjectURL(blob);
-  a.download  = 'posts.json';
-  a.click();
-  toast('✅ posts.json downloaded! Upload to GitHub now.');
-}
-
-// ── IMPORT ──
-function importJSON(input) {
-  const file = input.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    try {
-      const data = JSON.parse(e.target.result);
-      if (Array.isArray(data)) {
-        setPosts(data);
-        refreshAll();
-        toast('✅ ' + data.length + ' posts imported!');
-      } else { toast('❌ Invalid posts.json file!'); }
-    } catch { toast('❌ Cannot read file!'); }
-  };
-  reader.readAsText(file);
-  input.value = '';
-}
-
-function clearAll() {
-  if (!confirm('Delete ALL posts from browser? Make sure you saved posts.json first!')) return;
-  setPosts([]);
-  refreshAll();
-  toast('🗑️ All posts cleared!');
-}
-
-// ── RENDER ──
-function renderDashboard() {
-  const posts = getPosts();
-  document.getElementById('sideCount').textContent = posts.length;
-
-  // Stats
-  document.getElementById('statsGrid').innerHTML = `
-    <div class="stat-card"><div class="stat-num">${posts.length}</div><div class="stat-lbl">Total Posts</div></div>
-    ${Object.entries(CAT).map(([k,v]) => `
-    <div class="stat-card" style="border-top-color:${v.color}">
-      <div class="stat-num">${posts.filter(p=>p.cat===k).length}</div>
-      <div class="stat-lbl">${v.icon} ${v.label}</div>
-    </div>`).join('')}`;
-
-  // Recent
-  const recent = [...posts].reverse().slice(0,5);
-  document.getElementById('recentPosts').innerHTML = recent.length === 0
-    ? '<div style="color:rgba(255,255,255,0.2);font-size:13px;padding:16px 0;">No posts yet — Click "New Post" to start!</div>'
-    : recent.map(p => {
-        const c = CAT[p.cat]||CAT.news;
-        return `<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
-          <span style="font-size:18px;">${c.icon}</span>
-          <div style="flex:1;min-width:0;">
-            <div style="font-size:13px;font-weight:600;color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.title}</div>
-            <div style="font-size:11px;color:rgba(255,255,255,0.3);">${c.label} · ${p.date}</div>
-          </div>
-          <button class="action-btn edit-btn" onclick="editPost('${p.id}')">Edit</button>
-        </div>`;
-      }).join('');
-}
-
-function renderTable() {
-  const posts = [...getPosts()].reverse();
-  const tbody = document.getElementById('postsBody');
-  if (posts.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:rgba(255,255,255,0.2);padding:28px;">No posts yet</td></tr>';
+  if (!title || !date || !content) {
+    showMsg('error', '⚠️ Please fill in Title, Date, and Content.');
     return;
   }
-  tbody.innerHTML = posts.map(p => {
-    const c = CAT[p.cat]||CAT.news;
-    return `<tr>
-      <td style="font-weight:600;color:var(--white);max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.title}</td>
-      <td><span class="cat-badge" style="background:${c.color};color:#fff;">${c.icon} ${c.label}</span></td>
-      <td style="color:rgba(255,255,255,0.35);font-size:12px;">${p.date}</td>
-      <td>
-        <button class="action-btn edit-btn" onclick="editPost('${p.id}')">✏️ Edit</button>
-        <button class="action-btn del-btn" onclick="deletePost('${p.id}')">🗑️ Del</button>
-      </td>
-    </tr>`;
-  }).join('');
+
+  const btn = document.getElementById('submitBtn');
+  const lbl = document.getElementById('submitLabel');
+  btn.disabled = true;
+  lbl.textContent = 'Publishing...';
+
+  try {
+    let imgUrl = currentImgUrl || null;
+
+    if (imgFile) {
+      imgUrl = await uploadImage(imgFile);
+    }
+
+    const postData = { title, cat, date, content, img: imgUrl, updatedAt: serverTimestamp() };
+
+    if (editId) {
+      await updateDoc(doc(db, 'posts', editId), postData);
+      showMsg('success', '✓ Post updated successfully!');
+    } else {
+      postData.createdAt = serverTimestamp();
+      await addDoc(collection(db, 'posts'), postData);
+      showMsg('success', '✓ Post published successfully!');
+    }
+
+    resetForm();
+    loadPosts();
+  } catch (err) {
+    showMsg('error', '❌ Error: ' + err.message);
+  } finally {
+    btn.disabled = false;
+    lbl.textContent = editId ? '✓ Update Post' : '✚ Publish Post';
+    document.getElementById('uploadProgress').style.display = 'none';
+  }
+};
+
+function resetForm() {
+  document.getElementById('fTitle').value   = '';
+  document.getElementById('fContent').value = '';
+  document.getElementById('fImg').value     = '';
+  document.getElementById('imgPreview').style.display = 'none';
+  document.getElementById('imgPreview').src = '';
+  document.getElementById('fDate').value    = new Date().toISOString().split('T')[0];
+  document.getElementById('fCat').value     = 'news';
+  document.getElementById('editId').value   = '';
+  currentImgUrl  = null;
 }
 
-function refreshAll() { renderDashboard(); renderTable(); }
-
-function showPanel(name, btn) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('panel-'+name).classList.add('active');
-  if (btn) btn.classList.add('active');
-  if (name === 'new-post' && !document.getElementById('editId').value) resetForm();
+// ── LOAD POSTS ──
+async function loadPosts() {
+  try {
+    const q    = query(collection(db, 'posts'), orderBy('createdAt', 'desc'));
+    const snap = await getDocs(q);
+    allPostsCache = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderPostsList(allPostsCache);
+  } catch (err) {
+    document.getElementById('postsList').innerHTML =
+      `<p style="color:rgba(255,0,0,0.5);font-size:12px;padding:20px;">Error loading posts. Check Firebase config.</p>`;
+  }
 }
 
-function toast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3500);
+function renderPostsList(posts) {
+  document.getElementById('postsCount').textContent = posts.length;
+  if (posts.length === 0) {
+    document.getElementById('postsList').innerHTML = `
+      <div class="posts-empty"><div class="ei">📭</div><p>No posts yet. Create your first one!</p></div>`;
+    return;
+  }
+  document.getElementById('postsList').innerHTML = posts.map(p => `
+    <div class="post-item">
+      <div class="pi-top">
+        <div class="pi-title">${p.title}</div>
+        <div class="pi-actions">
+          <button class="pi-btn edit" onclick="editPost('${p.id}')">Edit</button>
+          <button class="pi-btn del"  onclick="deletePost('${p.id}')">Del</button>
+        </div>
+      </div>
+      <div class="pi-meta">
+        <span class="pi-cat cat-${p.cat}">${p.cat}</span>
+        <span class="pi-date">📅 ${p.date}</span>
+      </div>
+      <div class="pi-excerpt">${(p.content||'').substring(0,100)}${(p.content||'').length>100?'...':''}</div>
+    </div>`).join('');
 }
 
-if (sessionStorage.getItem('ahtor_logged') === '1') refreshAll();
+// ── SEARCH ──
+window.searchPosts = function(q) {
+  if (!q) { renderPostsList(allPostsCache); return; }
+  const filtered = allPostsCache.filter(p =>
+    p.title.toLowerCase().includes(q.toLowerCase()) ||
+    (p.content||'').toLowerCase().includes(q.toLowerCase())
+  );
+  renderPostsList(filtered);
+};
+
+// ── EDIT ──
+window.editPost = function(id) {
+  const p = allPostsCache.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('fTitle').value   = p.title;
+  document.getElementById('fCat').value     = p.cat;
+  document.getElementById('fDate').value    = p.date;
+  document.getElementById('fContent').value = p.content;
+  document.getElementById('editId').value   = id;
+  currentImgUrl  = p.img || null;
+
+  if (p.img) {
+    const preview = document.getElementById('imgPreview');
+    preview.src   = p.img;
+    preview.style.display = 'block';
+  }
+
+  document.getElementById('formTitle').textContent = 'EDIT POST';
+  document.getElementById('formSub').textContent   = 'Updating existing entry';
+  document.getElementById('submitLabel').textContent = '✓ Update Post';
+  document.getElementById('cancelEdit').style.display = 'block';
+  document.querySelector('.form-panel').scrollIntoView({ behavior:'smooth' });
+};
+
+window.cancelEditMode = function() {
+  resetForm();
+  document.getElementById('formTitle').textContent   = 'NEW POST';
+  document.getElementById('formSub').textContent     = 'Create a new blog entry';
+  document.getElementById('submitLabel').textContent = '✚ Publish Post';
+  document.getElementById('cancelEdit').style.display = 'none';
+};
+
+// ── DELETE ──
+window.deletePost = async function(id) {
+  if (!confirm('Delete this post? This cannot be undone.')) return;
+  try {
+    await deleteDoc(doc(db, 'posts', id));
+    loadPosts();
+  } catch (err) {
+    alert('Error deleting: ' + err.message);
+  }
+};
+
+// ── MSG ──
+function showMsg(type, text) {
+  const el = document.getElementById('formMsg');
+  el.className = `form-msg ${type}`;
+  el.textContent = text;
+  el.style.display = 'block';
+  setTimeout(() => { el.style.display = 'none'; }, 5000);
+}
 </script>
 </body>
 </html>
