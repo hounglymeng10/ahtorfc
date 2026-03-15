@@ -17,7 +17,12 @@
   .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:3px; color:var(--white); text-decoration:none; }
   .nav-logo span { color:var(--yellow); }
   .nav-links { display:flex; gap:32px; list-style:none; }
-  .nav-links a { font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#aaccb0; text-decoration:none; transition:color 0.2s; }
+    .nav-links a {
+    font-family: 'MiSans Khmer', sans-serif;
+    font-size: 13px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: #aaccb0; text-decoration: none;
+    transition: color 0.2s;
+  }
   .nav-links a:hover, .nav-links a.active { color:var(--yellow); }
 
   .hero { min-height:300px; background:linear-gradient(160deg,rgba(14,26,16,0.92) 0%,rgba(27,107,47,0.45) 60%,rgba(14,26,16,0.97) 100%),repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(27,107,47,0.05) 40px,rgba(27,107,47,0.05) 80px); background-color:var(--green3); display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center; padding:100px 48px 56px; }
@@ -133,7 +138,7 @@
     <li><a href="index.html#players">Players</a></li>
     <li><a href="index.html#sponsor">Sponsor</a></li>
     <li><a href="index.html#contact">Contact</a></li>
-    <li><a href="merchandise.html" class="active">Shop</a></li>
+    <li><a href="merchandise.html" class="active">Merchandise</a></li>
   </ul>
 </nav>
 
@@ -160,9 +165,9 @@
   <div class="section-sub">ចុច Product ដើម្បីមើលលម្អិត → ជ្រើស Size → Order via Telegram ភ្លាម! ⚽</div>
 
   <div class="filters">
-    <button class="filter-btn active" onclick="filter('all',this)">ទាំងអស់</button>
-    <button class="filter-btn" onclick="filter('jersey',this)">Jersey</button>
-    <button class="filter-btn" onclick="filter('acc',this)">Accessories</button>
+    <button class="filter-btn active" onclick="filter('all',this)">ALL PRODUCTS</button>
+    <button class="filter-btn" onclick="filter('jersey',this)">JERSEY</button>
+    <button class="filter-btn" onclick="filter('acc',this)">ACCESSORIES</button>
   </div>
 
   <div class="product-grid">
