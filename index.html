@@ -1127,7 +1127,7 @@ const db  = getFirestore(app);
 
 async function loadLatestNews() {
   try {
-    const q    = query(collection(db,'posts'), orderBy('createdAt','desc'), limit(3));
+    const q    = query(collection(db,'posts'), orderBy('createdAt','desc'), limit(4));
     const snap = await getDocs(q);
     const posts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     const grid  = document.getElementById('indexNewsGrid');
