@@ -787,201 +787,146 @@
     <a href="blog.html" class="news-view-all">View All Posts →</a>
   </div>
 </section>
-
 <!-- PLAYERS -->
 <section id="players">
   <div class="section-label">The Squad</div>
   <div class="section-title">OUR PLAYERS</div>
   <div class="section-sub">AHTOR FC PLAYERS</div>
 
-  <div style="display:none;gap:12px;margin-bottom:32px;">
-    <div style="background:rgba(27,107,47,0.2);border:1px solid var(--green);padding:8px 20px;font-family:'MiSans Khmer',sans-serif;font-size:12px;letter-spacing:2px;color:var(--yellow);">GROUP A — 18 PLAYERS</div>
-    <div style="background:rgba(21,101,192,0.2);border:1px solid #1565C0;padding:8px 20px;font-family:'MiSans Khmer',sans-serif;font-size:12px;letter-spacing:2px;color:#64B5F6;">GROUP B — N/A PLAYERS</div>
-  </div>
-
   <div class="players-grid">
-    <!-- Group A -->
-    <div class="player-card fade-in">
-      <div class="pc-avatar">
-        <img src="players/22.jpg" alt="Heab Sokvath" onerror="this.style.display='none';this.parentElement.innerHTML='HS';">
-      </div>
-      <div class="pc-no">22</div>
-      <div class="pc-name">HEAB SOKVATH</div>
-      <div class="pc-khmer">ហ៊ាប សុវត្ថ</div>
-      <div class="pc-position">Goalkeeper</div>
+    <div class="player-card fade-in" onclick="openPlayer('Heab Sokvath','ហ៊ាប សុវត្ថ','22','GK','players/sovath.png','Goalkeeper — Group A')">
+      <div class="pc-avatar"><img src="players/sovath.png" alt="Heab Sokvath" onerror="this.style.display='none';this.parentElement.innerHTML='HS';"></div>
+      <div class="pc-no">22</div><div class="pc-name">HEAB SOKVATH</div>
+      <div class="pc-khmer">ហ៊ាប សុវត្ថ</div><div class="pc-position">GK</div>
     </div>
-
-    <div class="player-card fade-in">
-      <div class="pc-avatar">
-        <img src="players/01.jpg" alt="Ty Thom" onerror="this.style.display='none';this.parentElement.innerHTML='TT';">
-      </div>
-      <div class="pc-no">01</div>
-      <div class="pc-name">TY THOM</div>
-      <div class="pc-khmer">មិត ទី</div>
-      <div class="pc-position">GK</div>
+    <div class="player-card fade-in" onclick="openPlayer('Mith Ty','មិត ទី','01','GK','players/ty.png','Goalkeeper — Group A')">
+      <div class="pc-avatar"><img src="players/ty.png" alt="Mith Ty" onerror="this.style.display='none';this.parentElement.innerHTML='TT';"></div>
+      <div class="pc-no">01</div><div class="pc-name">MITH TY</div>
+      <div class="pc-khmer">មិត ទី</div><div class="pc-position">GK</div>
     </div>
-
-    <div class="player-card fade-in">
-      <div class="pc-avatar">
-        <img src="players/20.jpg" alt="H. Lyheang" onerror="this.style.display='none';this.parentElement.innerHTML='HL';">
-      </div>
-      <div class="pc-no">20</div>
-      <div class="pc-name">H. LYHEANG</div>
-      <div class="pc-khmer">ហឹង លីហ៊ាង</div>
-      <div class="pc-position">Defender</div>
+    <div class="player-card fade-in" onclick="openPlayer('Hoeng Lyheang','ហឹង លីហ៊ាង','20','Defender','players/heang.png','Defender — Group A')">
+      <div class="pc-avatar"><img src="players/heang.png" alt="H. Lyheang" onerror="this.style.display='none';this.parentElement.innerHTML='HL';"></div>
+      <div class="pc-no">20</div><div class="pc-name">HOENG LYHEANG</div>
+      <div class="pc-khmer">ហឹង លីហ៊ាង</div><div class="pc-position">Defender</div>
     </div>
-
-    <div class="player-card fade-in">
-      <div class="pc-avatar">
-        <img src="players/18.jpg" alt="Reak Sa" onerror="this.style.display='none';this.parentElement.innerHTML='RS';">
-      </div>
-      <div class="pc-no">18</div>
-      <div class="pc-name">REAK SA</div>
-      <div class="pc-khmer">រឿន វីរាក់</div>
-      <div class="pc-position">Defender</div>
+    <div class="player-card fade-in" onclick="openPlayer('Roern Vireak','រឿន វីរាក់','18','Defender','players/reak.png','Defender — Group A')">
+      <div class="pc-avatar"><img src="players/reak.png" alt="Reak Sa" onerror="this.style.display='none';this.parentElement.innerHTML='RS';"></div>
+      <div class="pc-no">18</div><div class="pc-name">ROERN VIREAK</div>
+      <div class="pc-khmer">រឿន វីរាក់</div><div class="pc-position">Defender</div>
     </div>
-
-    <div class="player-card fade-in">
-      <div class="pc-avatar">
-        <img src="players/17.jpg" alt="Ny Bros Thy" onerror="this.style.display='none';this.parentElement.innerHTML='NT';">
-      </div>
-      <div class="pc-no">17</div>
-      <div class="pc-name">NY BROS THY</div>
-      <div class="pc-khmer">នី វិទ្ធី</div>
-      <div class="pc-position">Midfielder</div>
+    <div class="player-card fade-in" onclick="openPlayer('Ny Rithy','នី វិទ្ធី','17','Midfielder','players/rithy.png','Midfielder — Group A')">
+      <div class="pc-avatar"><img src="players/rithy.png" alt="Ny Bros Thy" onerror="this.style.display='none';this.parentElement.innerHTML='NT';"></div>
+      <div class="pc-no">17</div><div class="pc-name">NY RITHY</div>
+      <div class="pc-khmer">នី វិទ្ធី</div><div class="pc-position">Midfielder</div>
     </div>
-
-    <div class="player-card fade-in">
-      <div class="pc-avatar">
-        <img src="players/19.jpg" alt="P. Vicheka" onerror="this.style.display='none';this.parentElement.innerHTML='PV';">
-      </div>
-      <div class="pc-no">19</div>
-      <div class="pc-name">P. VICHEKA</div>
-      <div class="pc-khmer">ផន វិច្ចកា</div>
-      <div class="pc-position">Midfielder</div>
+    <div class="player-card fade-in" onclick="openPlayer('Porn Vicheka','ផន វិច្ចកា','19','Midfielder','players/ka.png','Midfielder — Group A')">
+      <div class="pc-avatar"><img src="players/ka.png" alt="P. Vicheka" onerror="this.style.display='none';this.parentElement.innerHTML='PV';"></div>
+      <div class="pc-no">19</div><div class="pc-name">PORN VICHEKA</div>
+      <div class="pc-khmer">ផន វិច្ចកា</div><div class="pc-position">Midfielder</div>
     </div>
-
-    <div class="player-card fade-in">
-      <div class="pc-avatar">
-        <img src="players/10.jpg" alt="Houng Lymeng" onerror="this.style.display='none';this.parentElement.innerHTML='HL';">
-      </div>
-      <div class="pc-no">10</div>
-      <div class="pc-name">HOUNG LYMENG</div>
-      <div class="pc-khmer">ហួង លីម៉េង</div>
-      <div class="pc-position">Forward</div>
+    <div class="player-card fade-in" onclick="openPlayer('Houng Lymeng','ហួង លីម៉េង','10','Forward','players/lymeng.png','Forward — Group A')">
+      <div class="pc-avatar"><img src="players/lymeng.png" alt="Houng Lymeng" onerror="this.style.display='none';this.parentElement.innerHTML='HL';"></div>
+      <div class="pc-no">10</div><div class="pc-name">HOUNG LYMENG</div>
+      <div class="pc-khmer">ហួង លីម៉េង</div><div class="pc-position">Forward</div>
     </div>
-
-    <div class="player-card fade-in">
-      <div class="pc-avatar">
-        <img src="players/07.jpg" alt="Thon Sokunthear" onerror="this.style.display='none';this.parentElement.innerHTML='TS';">
-      </div>
-      <div class="pc-no">07</div>
-      <div class="pc-name">THON SOKUNTHEAR</div>
-      <div class="pc-khmer">ថោន សុគុន្ធា</div>
-      <div class="pc-position">Midfielder</div>
+    <div class="player-card fade-in" onclick="openPlayer('Thon Sokunthear','ថោន សុគុន្ធា','07','Midfielder','players/thea.png','Midfielder — Group A')">
+      <div class="pc-avatar"><img src="players/thea.png" alt="Thon Sokunthear" onerror="this.style.display='none';this.parentElement.innerHTML='TS';"></div>
+      <div class="pc-no">07</div><div class="pc-name">THON SOKUNTHEAR</div>
+      <div class="pc-khmer">ថោន សុគុន្ធា</div><div class="pc-position">Midfielder</div>
     </div>
-
-    <div class="player-card fade-in">
-      <div class="pc-avatar">
-        <img src="players/11.jpg" alt="Thorng New" onerror="this.style.display='none';this.parentElement.innerHTML='TN';">
-      </div>
-      <div class="pc-no">11</div>
-      <div class="pc-name">THORNG NEW</div>
-      <div class="pc-khmer">ខ្មៅ អេពូថង</div>
-      <div class="pc-position">Forward</div>
+    <div class="player-card fade-in" onclick="openPlayer('Pu Thorng','ខ្មៅ អេពូថង','11','Forward','players/thorng.png','Forward — Group A')">
+      <div class="pc-avatar"><img src="players/thorng.png" alt="Thorng New" onerror="this.style.display='none';this.parentElement.innerHTML='TN';"></div>
+      <div class="pc-no">11</div><div class="pc-name">PU THORNG</div>
+      <div class="pc-khmer">ខ្មៅ អេពូថង</div><div class="pc-position">Forward</div>
     </div>
-
-    <div class="player-card fade-in">
-      <div class="pc-avatar">
-        <img src="players/47.jpg" alt="Heng Neng" onerror="this.style.display='none';this.parentElement.innerHTML='HN';">
-      </div>
-      <div class="pc-no">47</div>
-      <div class="pc-name">HENG NENG</div>
-      <div class="pc-khmer">ហេង ណេង</div>
-      <div class="pc-position">Defender</div>
+    <div class="player-card fade-in" onclick="openPlayer('Heng Neng','ហេង ណេង','47','Defender','players/neng.png','Defender — Group A')">
+      <div class="pc-avatar"><img src="players/neng.png" alt="Heng Neng" onerror="this.style.display='none';this.parentElement.innerHTML='HN';"></div>
+      <div class="pc-no">47</div><div class="pc-name">HENG NENG</div>
+      <div class="pc-khmer">ហេង ណេង</div><div class="pc-position">Defender</div>
     </div>
-
-    <div class="player-card fade-in">
-      <div class="pc-avatar">
-        <img src="players/21.jpg" alt="Vann Chhong" onerror="this.style.display='none';this.parentElement.innerHTML='VC';">
-      </div>
-      <div class="pc-no">21</div>
-      <div class="pc-name">VANN CHHONG</div>
-      <div class="pc-khmer">ឈី វ៉ាន់ឆុង</div>
-      <div class="pc-position">Midfielder</div>
+    <div class="player-card fade-in" onclick="openPlayer('Vann Chhong','ឈី វ៉ាន់ឆុង','21','Midfielder','players/Chhong.png','Midfielder — Group A')">
+      <div class="pc-avatar"><img src="players/Chhong.png" alt="Vann Chhong" onerror="this.style.display='none';this.parentElement.innerHTML='VC';"></div>
+      <div class="pc-no">21</div><div class="pc-name">VANN CHHONG</div>
+      <div class="pc-khmer">ឈី វ៉ាន់ឆុង</div><div class="pc-position">Midfielder</div>
     </div>
-
-    <div class="player-card fade-in">
-      <div class="pc-avatar">
-        <img src="players/08.jpg" alt="Ah Tev" onerror="this.style.display='none';this.parentElement.innerHTML='AT';">
-      </div>
-      <div class="pc-no">08</div>
-      <div class="pc-name">AH TEV</div>
-      <div class="pc-khmer">តូ ទៀវ</div>
-      <div class="pc-position">Midfielder</div>
+    <div class="player-card fade-in" onclick="openPlayer('To Teav','តូ ទៀវ','08','Midfielder','players/teav.png','Midfielder — Group A')">
+      <div class="pc-avatar"><img src="players/teav.png" alt="Ah Tev" onerror="this.style.display='none';this.parentElement.innerHTML='AT';"></div>
+      <div class="pc-no">08</div><div class="pc-name">TO TEAV</div>
+      <div class="pc-khmer">តូ ទៀវ</div><div class="pc-position">Midfielder</div>
     </div>
-
-    <div class="player-card fade-in">
-      <div class="pc-avatar">
-        <img src="players/04.jpg" alt="Sok Vorn" onerror="this.style.display='none';this.parentElement.innerHTML='SV';">
-      </div>
-      <div class="pc-no">04</div>
-      <div class="pc-name">SOK VORN</div>
-      <div class="pc-khmer">លាត សាវន</div>
-      <div class="pc-position">Defender</div>
+    <div class="player-card fade-in" onclick="openPlayer('Sok Vorn','លាត សាវន','04','Defender','players/sovorn.png','Defender — Group A')">
+      <div class="pc-avatar"><img src="players/sovorn.png" alt="Sok Vorn" onerror="this.style.display='none';this.parentElement.innerHTML='SV';"></div>
+      <div class="pc-no">04</div><div class="pc-name">SOK VORN</div>
+      <div class="pc-khmer">លាត សាវន</div><div class="pc-position">Defender</div>
     </div>
-
-    <div class="player-card fade-in">
-      <div class="pc-avatar">
-        <img src="players/09.jpg" alt="Vong Bra Vo" onerror="this.style.display='none';this.parentElement.innerHTML='VV';">
-      </div>
-      <div class="pc-no">09</div>
-      <div class="pc-name">VONG BRA VO</div>
-      <div class="pc-khmer">ឆែម វ៉ូ</div>
-      <div class="pc-position">Forward</div>
+    <div class="player-card fade-in" onclick="openPlayer('Vong Bravo','ឆែម វ៉ូ','09','Forward','players/vo.png','Forward — Group A')">
+      <div class="pc-avatar"><img src="players/vo.png" alt="Vong Bra Vo" onerror="this.style.display='none';this.parentElement.innerHTML='VV';"></div>
+      <div class="pc-no">09</div><div class="pc-name">VONG BRAVO</div>
+      <div class="pc-khmer">ឆែម វ៉ូ</div><div class="pc-position">Forward</div>
     </div>
-
-    <div class="player-card fade-in">
-      <div class="pc-avatar">
-        <img src="players/14.jpg" alt="Hear" onerror="this.style.display='none';this.parentElement.innerHTML='HE';">
-      </div>
-      <div class="pc-no">14</div>
-      <div class="pc-name">HEAR</div>
-      <div class="pc-khmer">អាហៀ</div>
-      <div class="pc-position">Defender</div>
+    <div class="player-card fade-in" onclick="openPlayer('Lanh Bert','ឡាញ់ ប៊ឺត','14','Defender','players/bert.png','Defender — Group A')">
+      <div class="pc-avatar"><img src="players/bert.png" alt="Hear" onerror="this.style.display='none';this.parentElement.innerHTML='HE';"></div>
+      <div class="pc-no">14</div><div class="pc-name">LANH BERT</div>
+      <div class="pc-khmer">ឡាញ់ ប៊ឺត</div><div class="pc-position">Defender</div>
     </div>
-
-    <div class="player-card fade-in">
-      <div class="pc-avatar">
-        <img src="players/06.jpg" alt="Sam Ban Poeun" onerror="this.style.display='none';this.parentElement.innerHTML='SP';">
-      </div>
-      <div class="pc-no">06</div>
-      <div class="pc-name">SAM BAN POEUN</div>
-      <div class="pc-khmer">ពឿន សំបាន</div>
-      <div class="pc-position">Midfielder</div>
-    </div>
-
-    <div class="player-card fade-in">
-      <div class="pc-avatar">
-        <img src="players/93.jpg" alt="Virong" onerror="this.style.display='none';this.parentElement.innerHTML='VI';">
-      </div>
-      <div class="pc-no">93</div>
-      <div class="pc-name">VIRONG</div>
-      <div class="pc-khmer">វីរ៉ុង</div>
-      <div class="pc-position">Forward</div>
-    </div>
-
-    <div class="player-card fade-in">
-      <div class="pc-avatar">
-        <img src="players/punray.jpg" alt="Punray" onerror="this.style.display='none';this.parentElement.innerHTML='PR';">
-      </div>
-      <div class="pc-no">—</div>
-      <div class="pc-name">PUNRAY</div>
-      <div class="pc-khmer">ពុនរាយ</div>
-      <div class="pc-position">Midfielder</div>
+    <div class="player-card fade-in" onclick="openPlayer('Poeun Samban','ពឿន សំបាន','06','Midfielder','players/samban.png','Midfielder — Group A')">
+      <div class="pc-avatar"><img src="players/samban.png" alt="Sam Ban Poeun" onerror="this.style.display='none';this.parentElement.innerHTML='SP';"></div>
+      <div class="pc-no">06</div><div class="pc-name">POEUN SAMBAN</div>
+      <div class="pc-khmer">ពឿន សំបាន</div><div class="pc-position">Midfielder</div>
     </div>
   </div>
 </section>
+
+<!-- PLAYER MODAL -->
+<div id="playerModal" onclick="closePlayer()" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;">
+  <div onclick="event.stopPropagation()" style="background:#0f1f12;border:1px solid rgba(27,107,47,0.4);border-top:4px solid var(--yellow);max-width:380px;width:90%;position:relative;overflow:hidden;">
+    
+    <!-- Close -->
+    <button onclick="closePlayer()" style="position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.07);border:none;color:white;width:32px;height:32px;cursor:pointer;font-size:16px;z-index:1;">✕</button>
+
+    <!-- Photo -->
+    <div id="mPhoto" style="height:260px;background:#0a1a0d;overflow:hidden;display:flex;align-items:center;justify-content:center;"></div>
+
+    <!-- Info -->
+    <div style="padding:24px;">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
+        <div id="mNo" style="font-family:'Bebas Neue',sans-serif;font-size:64px;line-height:1;color:rgba(27,107,47,0.4);"></div>
+        <div>
+          <div id="mName" style="font-family:'MiSans Khmer',sans-serif;font-size:18px;font-weight:800;color:var(--white);letter-spacing:1px;"></div>
+          <div id="mKhmer" style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:2px;"></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <div id="mPos" style="background:rgba(244,196,48,0.12);color:var(--yellow);border:1px solid rgba(244,196,48,0.3);font-family:'MiSans Khmer',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;"></div>
+        <div id="mGroup" style="background:rgba(27,107,47,0.15);color:#aaccb0;border:1px solid rgba(27,107,47,0.3);font-family:'MiSans Khmer',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;"></div>
+      </div>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;">
+        <div style="font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.2);text-transform:uppercase;">AHTOR FC · Season 2026</div>
+        <img src="LOGO2.png" style="width:32px;height:32px;object-fit:contain;opacity:0.5;">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openPlayer(name, khmer, no, pos, img, group) {
+  document.getElementById('mNo').textContent = no;
+  document.getElementById('mName').textContent = name;
+  document.getElementById('mKhmer').textContent = khmer;
+  document.getElementById('mPos').textContent = pos;
+  document.getElementById('mGroup').textContent = group;
+  document.getElementById('mPhoto').innerHTML =
+    `<img src="${img}" style="width:100%;height:100%;object-fit:cover;object-position:top;" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=\\'font-family:Bebas Neue,sans-serif;font-size:80px;color:rgba(255,255,255,0.1);\\'>' + no + '</div>'">`;
+  const modal = document.getElementById('playerModal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closePlayer() {
+  document.getElementById('playerModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closePlayer(); });
+</script>
 
 <!-- SPONSOR -->
 <section id="sponsor">
