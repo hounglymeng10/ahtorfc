@@ -398,64 +398,23 @@
 </div>
 
 <script>
-async function submitRegister(btn) {
-  const name  = document.getElementById('reg-name').value.trim();
-  const age   = document.getElementById('reg-age').value.trim();
-  const phone = document.getElementById('reg-phone').value.trim();
-  const job   = document.getElementById('reg-job').value.trim();
-  const pos   = document.getElementById('reg-pos').value;
-  const why   = document.getElementById('reg-why').value.trim();
-  const status = document.getElementById('reg-status');
+const SHEET_URL = 'PASTE_YOUR_WEB_APP_URL_HERE';
 
-  // Validate
-  if (!name || !age || !phone || !job || !pos || !why) {
-    status.className = 'error';
-    status.style.display = 'block';
-    status.textContent = '⚠️ Please fill in all fields before submitting.';
-    return;
-  }
-
-    const BOT_TOKEN = '8711591940:AAF8rXe2WFh6Hk6GOLKjX5LCHlOmMQLrN7s';
-    const CHAT_ID   = '967033185';
-
-  const message =
-`🟢 NEW PLAYER REGISTRATION — AHTOR FC
-
-👤 Name: ${name}
-🎂 Age: ${age}
-📱 Phone (Telegram): ${phone}
-💼 Occupation: ${job}
-⚽ Position: ${pos}
-💬 Reason: ${why}
-
-📅 Submitted: ${new Date().toLocaleString('en-GB')}
-#NewRegister #AHTORFC`;
-
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
-  status.style.display = 'none';
-
-  try {
-    const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: CHAT_ID, text: message })
-    });
-    const data = await res.json();
-    if (data.ok) {
-      document.getElementById('successOverlay').classList.add('show');
-      document.body.style.overflow = 'hidden';
-    } else {
-      throw new Error(data.description || 'Unknown error');
-    }
-  } catch(e) {
-    status.className = 'error';
-    status.style.display = 'block';
-    status.textContent = '❌ Failed to send. Please contact us directly on Telegram @ahtorfootball.';
-  } finally {
-    btn.textContent = 'Submit Registration →';
-    btn.disabled = false;
-  }
+const res = await fetch(SHEET_URL, {
+  method: 'POST',
+  body: JSON.stringify({
+    name:     name,
+    age:      age,
+    phone:    phone,
+    job:      job,
+    position: pos,
+    reason:   why
+  })
+});
+const data = await res.json();
+if (data.result === 'success') {
+  document.getElementById('successOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
 }
 </script>
 </body>
