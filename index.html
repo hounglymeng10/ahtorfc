@@ -8,6 +8,10 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+
+  @media (max-width: 768px) {
+  .identity-grid { grid-template-columns: 1fr !important; }
+}
   @font-face {
   font-family: 'MiSans Khmer';
   src: url('MiSansKhmer-Medium.ttf') format('truetype');
@@ -679,7 +683,7 @@
     </div>
   </div>
   <div class="hero-stats">
-    <div class="hero-stat"><div class="num">18</div><div class="lbl">Players</div></div>
+    <div class="hero-stat"><div class="num">18+</div><div class="lbl">Players</div></div>
     <div class="hero-stat"><div class="num">2</div><div class="lbl">Groups</div></div>
     <div class="hero-stat"><div class="num">2026</div><div class="lbl">Season</div></div>
   </div>
@@ -702,26 +706,27 @@
     <span><img src="LOGO2.png" style="width:16px;height:16px;object-fit:contain;vertical-align:middle;margin-right:6px;">WE ARE AHTOR FC</span>
   </div>
 </div>
-
 <!-- ABOUT -->
-<section id="about" style="position:relative;overflow:hidden;">
-  <div style="position:absolute;inset:0;background-image:url('LOGO2.png');background-repeat:no-repeat;background-position:center;background-size:60%;opacity:0.04;pointer-events:none;z-index:0;"></div>
+<section id="about" style="background:var(--dark);padding:100px 48px;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background-image:url('LOGO2.png');background-repeat:no-repeat;background-position:center;background-size:50%;opacity:0.03;pointer-events:none;z-index:0;"></div>
   <div style="position:relative;z-index:1;">
+
+    <!-- TOP: Story + Club Info -->
     <div class="section-label">About Us</div>
-    <div class="about-grid">
+    <div class="about-grid" style="margin-bottom:80px;">
       <div class="about-left fade-in">
         <div class="section-title">OUR<br>STORY</div>
         <div class="about-card">
-          <h3>How It Started</h3>
-          <p>AHTOR FC started as a group of high school students in Angkor Chum District who shared one passion — football. We played on dusty pitches, trained without proper kits, but never without spirit.</p>
+          <h3>ចំណុចចាប់ផ្ដើម</h3>
+          <p>ក្រុមបាល់ទាត់ អាទរ (AHTOR FC) បង្កើតឡើងពីការរួមក្រុមក្មេងៗសិស្សវិទ្យាល័យមួយក្រុមក្នុងស្រុកអង្គរជុំ ដែលមានក្ដីស្រឡាញ់តែមួយ គឺ "បាល់ទាត់"។ យើងធ្លាប់លេងនៅលើទីលានដីហុយ ហ្វឹកហាត់ដោយគ្មានឯកសណ្ឋានត្រឹមត្រូវ ប៉ុន្តែយើងមិនដែលខ្វះ "ស្មារតីតស៊ូ" នោះឡើយ។</p>
         </div>
         <div class="about-card">
-          <h3>Where We Are Now</h3>
-          <p>After graduating university, our founding members came back to build something real. Today AHTOR FC is a registered community football team with 18 players, a coach, and a vision to grow into Cambodia's most respected grassroots team.</p>
+          <h3>បច្ចុប្បន្នភាព</h3>
+          <p>ក្រោយពីបានបញ្ចប់ការសិក្សានៅសាកលវិទ្យាល័យ សមាជិកស្ថាបនិករបស់យើងបានវិលត្រឡប់មកជួបជុំគ្នាវិញ ដើម្បីកសាងអ្វីមួយដែលជារូបរាងពិតប្រាកដ។ ថ្ងៃនេះ អាទរ (AHTOR FC) បានក្លាយជាក្រុមបាល់ទាត់នៅក្នុងសហគមន៍ ដោយមានកីឡាករ ២០ នាក់ គ្រូបង្វឹកម្នាក់ និងមានចក្ខុវិស័យប្រែក្លាយខ្លួនទៅជាក្រុមបាល់ទាត់មូលដ្ឋាន (Grassroots) ដែលទទួលបានការគោរពបំផុតមួយក្នុងប្រទេសកម្ពុជា។</p>
         </div>
         <div class="about-card">
-          <h3>Where We Are Going</h3>
-          <p>We are building a Youth Academy, competing in provincial leagues, and creating opportunities for young players in Siem Reap. By 2030, AHTOR FC will be a professional football team — and we are just getting started.</p>
+          <h3>គោលដៅទៅអនាគត</h3>
+          <p>យើងបង្កើតបាល់ទាត់យុវជន (Youth Academy) ដែលពពេញទៅដោយសមត្ថភាពនៅក្នុងស្រុកអង្គរជុំ ខេត្តសៀមរាប។</p>
         </div>
       </div>
 
@@ -771,6 +776,99 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div style="display:flex;align-items:center;gap:20px;margin-bottom:56px;">
+      <div style="flex:1;height:1px;background:rgba(27,107,47,0.2);"></div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:4px;color:rgba(255,255,255,0.2);">OUR IDENTITY</div>
+      <div style="flex:1;height:1px;background:rgba(27,107,47,0.2);"></div>
+    </div>
+
+    <!-- IDENTITY: 4 cards equal -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;" class="identity-grid">
+
+      <!-- NAME -->
+      <div class="fade-in" style="background:linear-gradient(160deg,rgba(27,107,47,0.12),rgba(14,26,16,0.9));border:1px solid rgba(27,107,47,0.2);border-top:3px solid var(--yellow);padding:32px;position:relative;overflow:hidden;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:64px;color:rgba(255,255,255,0.03);position:absolute;top:4px;right:12px;letter-spacing:2px;pointer-events:none;">NAME</div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:var(--yellow);margin-bottom:12px;text-transform:uppercase;">តើ "អាទរ" មានន័យថាអ្វី?</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--white);margin-bottom:16px;">AHTOR — អាទរ</div>
+        <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.8;margin-bottom:12px;">ឈ្មោះ <strong style="color:var(--white);">"អាទរ"</strong> ដកស្រង់ចេញពីពាក្យ "អាណិតអាសូរ" និង "អើពើ" — ឆ្លុះបញ្ចាំងពីការយកចិត្តទុកដាក់ចំពោះយុវជន និងសហគមន៍។</p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.8;">វាក៏មានសូរប្រហាក់ប្រហែល <strong style="color:var(--yellow);">"អង្គរ"</strong> — មោទនភាពនៃស្រុកអង្គរជុំ ខេត្តសៀមរាប។</p>
+        <div style="margin-top:20px;padding:12px 16px;border-left:3px solid var(--yellow);background:rgba(244,196,48,0.05);font-size:12px;color:rgba(255,255,255,0.45);line-height:1.7;font-style:italic;">
+          "ស្មារតីយុវជនដែលរស់នៅដោយមានក្ដីស្រឡាញ់ រាប់អានគ្នា និងមានឆន្ទៈមោះមុតក្នុងការលើកស្ទួយស្រុកកំណើត"
+        </div>
+      </div>
+
+      <!-- COLORS -->
+      <div class="fade-in" style="background:linear-gradient(160deg,rgba(27,107,47,0.12),rgba(14,26,16,0.9));border:1px solid rgba(27,107,47,0.2);border-top:3px solid var(--green);padding:32px;position:relative;overflow:hidden;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:64px;color:rgba(255,255,255,0.03);position:absolute;top:4px;right:12px;letter-spacing:2px;pointer-events:none;">COLOR</div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:var(--yellow);margin-bottom:12px;text-transform:uppercase;">ហេតុអ្វីពណ៌ទាំងពីរនេះ?</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--white);margin-bottom:20px;">ពណ៌បៃតង & ពណ៌មាស</div>
+        <div style="display:flex;gap:12px;margin-bottom:20px;">
+          <div style="flex:1;background:rgba(27,107,47,0.25);border:1px solid rgba(27,107,47,0.4);padding:14px;text-align:center;">
+            <div style="width:28px;height:28px;background:#1B6B2F;border-radius:50%;margin:0 auto 8px;"></div>
+            <div style="font-size:10px;font-weight:800;letter-spacing:1px;color:#4caf50;margin-bottom:4px;">GREEN</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);line-height:1.5;">ក្តីសង្ឃឹម<br>& រីកចម្រើន</div>
+          </div>
+          <div style="flex:1;background:rgba(244,196,48,0.08);border:1px solid rgba(244,196,48,0.25);padding:14px;text-align:center;">
+            <div style="width:28px;height:28px;background:#F4C430;border-radius:50%;margin:0 auto 8px;"></div>
+            <div style="font-size:10px;font-weight:800;letter-spacing:1px;color:var(--yellow);margin-bottom:4px;">GOLD</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);line-height:1.5;">តម្លៃ<br>& ជ័យជម្នះ</div>
+          </div>
+        </div>
+        <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.8;">ពណ៌បៃតង — វាលស្មៅ និងធម្មជាតិស្រស់បំព្រងស្រុកអង្គរជុំ។ ពណ៌មាស — គោលដៅ និងស្មារតីដូចមាសទឹកដប់។</p>
+      </div>
+
+      <!-- LOGO -->
+      <div class="fade-in" style="background:linear-gradient(160deg,rgba(27,107,47,0.12),rgba(14,26,16,0.9));border:1px solid rgba(27,107,47,0.2);border-top:3px solid var(--yellow);padding:32px;position:relative;overflow:hidden;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:64px;color:rgba(255,255,255,0.03);position:absolute;top:4px;right:12px;letter-spacing:2px;pointer-events:none;">LOGO</div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:var(--yellow);margin-bottom:12px;text-transform:uppercase;">អត្តន័យ ឡូហ្គោ អាទរ?</div>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
+          <img src="LOGO2.png" alt="AHTOR Logo" style="width:56px;height:56px;object-fit:contain;flex-shrink:0;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--white);line-height:1.1;">អត្តសញ្ញាណ អាទរ</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div style="width:5px;height:5px;background:var(--yellow);border-radius:50%;margin-top:6px;flex-shrink:0;"></div>
+            <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6;"><strong style="color:var(--white);">បាល់ & ខែល</strong> — ការតស៊ូ និងការការពារអត្តសញ្ញាណ</p>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div style="width:5px;height:5px;background:var(--yellow);border-radius:50%;margin-top:6px;flex-shrink:0;"></div>
+            <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6;"><strong style="color:var(--white);">បូពណ៌បៃតង</strong> — សាមគ្គីភាព គ្រួសារតែមួយ</p>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div style="width:5px;height:5px;background:var(--yellow);border-radius:50%;margin-top:6px;flex-shrink:0;"></div>
+            <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6;"><strong style="color:var(--white);">ផ្កាយមាស ២</strong> — វិន័យ & សមត្ថភាព</p>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div style="width:5px;height:5px;background:var(--yellow);border-radius:50%;margin-top:6px;flex-shrink:0;"></div>
+            <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6;"><strong style="color:var(--white);">អក្សរ "អាទរ"</strong> — មោទនភាពវប្បធម៌ខ្មែរ</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- VISION -->
+      <div class="fade-in" style="background:linear-gradient(160deg,rgba(27,107,47,0.12),rgba(14,26,16,0.9));border:1px solid rgba(27,107,47,0.2);border-top:3px solid var(--green);padding:32px;position:relative;overflow:hidden;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:64px;color:rgba(255,255,255,0.03);position:absolute;top:4px;right:12px;letter-spacing:2px;pointer-events:none;">VISION</div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:var(--yellow);margin-bottom:12px;text-transform:uppercase;">ចក្ខុវិស័យក្រុម</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;color:var(--white);margin-bottom:20px;line-height:1.2;">កសាងអនាគតយុវជន តាមរយៈស្មារតីកីឡា</div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--yellow);flex-shrink:0;line-height:1.1;min-width:24px;">01</div>
+            <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6;"><strong style="color:var(--white);">យុវជនមានសុខភាពល្អ</strong> — ជៀសឆ្ងាយពីគ្រឿងញៀន តាមរយៈការលេងកីឡា</p>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--yellow);flex-shrink:0;line-height:1.1;min-width:24px;">02</div>
+            <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6;"><strong style="color:var(--white);">តុល្យភាពការសិក្សា</strong> — វិន័យ & ចំណេះដឹង ក្លាយជាធនធានសង្គម</p>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--yellow);flex-shrink:0;line-height:1.1;min-width:24px;">03</div>
+            <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6;"><strong style="color:var(--white);">មោទនភាពសហគមន៍</strong> — តំណាងស្មារតីយុវជនស្រុកអង្គរជុំ</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -865,15 +963,25 @@
       <div class="pc-no">09</div><div class="pc-name">VONG BRAVO</div>
       <div class="pc-khmer">ឆែម វ៉ូ</div><div class="pc-position">Forward</div>
     </div>
-    <div class="player-card fade-in" onclick="openPlayer('Lanh Bert','ឡាញ់ ប៊ឺត','14','Defender','players/bert.png','Defender — Group A')">
-      <div class="pc-avatar"><img src="players/bert.png" alt="Hear" onerror="this.style.display='none';this.parentElement.innerHTML='HE';"></div>
-      <div class="pc-no">14</div><div class="pc-name">LANH BERT</div>
+    <div class="player-card fade-in" onclick="openPlayer('Lanh Bert','ឡាញ់ ប៊ឺត','68','Defender','players/bert.png','Defender — Group A')">
+      <div class="pc-avatar"><img src="players/bert.png" alt="Bert" onerror="this.style.display='none';this.parentElement.innerHTML='HE';"></div>
+      <div class="pc-no">68</div><div class="pc-name">LANH BERT</div>
       <div class="pc-khmer">ឡាញ់ ប៊ឺត</div><div class="pc-position">Defender</div>
     </div>
     <div class="player-card fade-in" onclick="openPlayer('Poeun Samban','ពឿន សំបាន','06','Midfielder','players/samban.png','Midfielder — Group A')">
       <div class="pc-avatar"><img src="players/samban.png" alt="Sam Ban Poeun" onerror="this.style.display='none';this.parentElement.innerHTML='SP';"></div>
       <div class="pc-no">06</div><div class="pc-name">POEUN SAMBAN</div>
       <div class="pc-khmer">ពឿន សំបាន</div><div class="pc-position">Midfielder</div>
+    </div>
+    <div class="player-card fade-in" onclick="openPlayer('Houern Hello','ហឿន ហេឡូ','50','Midfielder','players/hello.png','Midfielder — Group A')">
+      <div class="pc-avatar"><img src="players/hello.png" alt="Sam Ban Poeun" onerror="this.style.display='none';this.parentElement.innerHTML='SP';"></div>
+      <div class="pc-no">50</div><div class="pc-name">HOEURN HELLO</div>
+      <div class="pc-khmer">ហឿន ហេឡូ</div><div class="pc-position">Midfielder</div>
+    </div>
+    <div class="player-card fade-in" onclick="openPlayer('Hear','ហៀ','14','Midfielder','players/hear.png','Midfielder — Group A')">
+      <div class="pc-avatar"><img src="players/hear.png" alt="Sam Ban Poeun" onerror="this.style.display='none';this.parentElement.innerHTML='SP';"></div>
+      <div class="pc-no">14</div><div class="pc-name">HEAR</div>
+      <div class="pc-khmer">ហៀ</div><div class="pc-position">Midfielder</div>
     </div>
   </div>
 </section>
@@ -936,39 +1044,39 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closePlayer()
   <div class="section-sub">Support AHTOR FC and grow your brand in Siem Reap. Your logo. Our jerseys. Our community. Your impact.</div>
   <div class="sponsor-grid">
     <div class="sponsor-tier tier-gold fade-in">
-      <div class="tier-header"><div class="tier-icon">🥇</div><div class="tier-name">GOLD</div><div class="tier-price">$$ <span>/ Season</span></div></div>
+      <div class="tier-header"><div class="tier-icon">🥇</div><div class="tier-name">កញ្ចប់មាស (GOLD)</div><div class="tier-price">$$ <span>/ រដូវកាល</span></div></div>
       <div class="tier-body">
-        <div class="tier-feature">Logo placement on the FRONT of all jerseys</div>
-        <div class="tier-feature">Fan Banners displayed at ALL matches (both Home and Away)</div>
-        <div class="tier-feature">Monthly business promotional posts on social media</div>
-        <div class="tier-feature">Photos and videos posted with the largest logo size</div>
-        <div class="tier-feature">Receive an official Sponsorship Certificate</div>
-        <div class="tier-feature">Name listed on the website</div>
-        <div class="tier-feature">Logo on all printed official documents</div>
-        <div class="tier-feature" style="color:var(--yellow);font-weight:600;">Only 1 slot available — Exclusive!</div>
+        <div class="tier-feature">ដាក់ឡូហ្គោនៅ ផ្នែកខាងមុខ នៃអាវប្រកួតទាំងអស់</div>
+        <div class="tier-feature">ដាក់បដា (Banner) សម្រាប់អ្នកគាំទ្រផ្សព្វផ្សាយនៅរាល់ការប្រកួតទាំងក្នុងដី និងក្រៅដី</div>
+        <div class="tier-feature">មានការផ្សព្វផ្សាយអាជីវកម្មជាមួយក្រុម អាទរ លើបណ្តាញសង្គមរបស់យើង។</div>
+        <div class="tier-feature">ឡូហ្គោអាជីវកម្មរបស់អ្នកធំជាងគេ ក្នុងរូបភាព និងវីដេអូរ របស់យើងអំពីការប្រកួត។</div>
+        <div class="tier-feature">ទទួលបានវិញ្ញាបនបត្រឧបត្ថម្ភផ្លូវការពីក្រុមបាល់ទាត់ អាទរ។</div>
+        <div class="tier-feature">មានឈ្មោះក្នុងបញ្ជីអ្នកឧបត្ថម្ភលើគេហទំព័រ (website) របស់យើង។</div>
+        <div class="tier-feature">ដាក់ឡូហ្គោលើរាល់ឯកសារបោះពុម្ពផ្លូវការទាំងអស់។</div>
+        <div class="tier-feature" style="color:var(--yellow);font-weight:600;">⚠️ មានតែ ១ កន្លែងប៉ុណ្ណោះ (Exclusive!)</div>
       </div>
     </div>
     <div class="sponsor-tier tier-silver fade-in">
-      <div class="tier-header"><div class="tier-icon">🥈</div><div class="tier-name">SILVER</div><div class="tier-price">$$ <span>/ Season</span></div></div>
+      <div class="tier-header"><div class="tier-icon">🥈</div><div class="tier-name">កញ្ចប់ប្រាក់ (SILVER)</div><div class="tier-price">$$ <span>/ រដូវកាល</span></div></div>
       <div class="tier-body">
-        <div class="tier-feature">Logo placement on the BACK of all jerseys</div>
-        <div class="tier-feature">Fan Banners displayed at Home matches</div>
-        <div class="tier-feature">Photos and videos posted with logo</div>
-        <div class="tier-feature">Logo on all printed official documents</div>
-        <div class="tier-feature">Name listed on the website</div>
-        <div class="tier-feature">Receive an official Sponsorship Certificate</div>
-        <div class="tier-feature" style="color:#e93535;font-weight:600;">Limited to 2 companies only</div>
+        <div class="tier-feature">ដាក់ឡូហ្គោនៅ ផ្នែកខាងស្ដាំ​ រឺឆ្វេង នៃដៃអាវប្រកួតទាំងអស់។</div>
+        <div class="tier-feature">ដាក់បដា (Banner) សម្រាប់អ្នកគាំទ្រផ្សព្វផ្សាយនៅរាល់ការប្រកួតនៅក្នុងដី។</div>
+        <div class="tier-feature">រូបភាព និងវីដេអូផ្សព្វផ្សាយអំពីការប្រកួតនឹងមានដាក់ឡូហ្គោអ្នក។</div>
+        <div class="tier-feature">ដាក់ឡូហ្គោលើរាល់ឯកសារបោះពុម្ពផ្លូវការទាំងអស់។</div>
+        <div class="tier-feature">មានឈ្មោះក្នុងបញ្ជីអ្នកឧបត្ថម្ភលើគេហទំព័រ (website) របស់យើង។</div>
+        <div class="tier-feature">ទទួលបានវិញ្ញាបនបត្រឧបត្ថម្ភផ្លូវការពីក្រុមបាល់ទាត់ អាទរ។</div>
+        <div class="tier-feature" style="color:#e93535;font-weight:600;">⚠️ មានកំណត់ត្រឹមតែ ២ អាជីវកម្មប៉ុណ្ណោះ។</div>
       </div>
     </div>
     <div class="sponsor-tier tier-bronze fade-in">
-      <div class="tier-header"><div class="tier-icon">🥉</div><div class="tier-name">BRONZE</div><div class="tier-price">$$ <span>/ Season</span></div></div>
+      <div class="tier-header"><div class="tier-icon">🥉</div><div class="tier-name">កញ្ចប់សំរឹទ្ធ (BRONZE)</div><div class="tier-price">$$ <span>/ រដូវកាល</span></div></div>
       <div class="tier-body">
-        <div class="tier-feature">Logo on training kits or match shorts</div>
-        <div class="tier-feature">Photos and videos posted with logo</div>
-        <div class="tier-feature">Receive an official Sponsorship Certificate</div>
-        <div class="tier-feature">Name listed on the website</div>
-        <div class="tier-feature">Certificate of Sponsorship</div>
-        <div class="tier-feature" style="color:#cd7f32;font-weight:600;">UNLIMITED — Open to all!</div>
+        <div class="tier-feature">ដាក់ឡូហ្គោនៅ ផ្នែកខាងក្រោយ នៃអាវប្រកួតទាំងអស់។</div>
+        <div class="tier-feature">ដាក់បដា (Banner) សម្រាប់អ្នកគាំទ្រផ្សព្វផ្សាយនៅរាល់ការប្រកួតនៅក្នុងដី។</div>
+        <div class="tier-feature">មានឈ្មោះក្នុងបញ្ជីអ្នកឧបត្ថម្ភលើគេហទំព័រ (website) របស់យើង។</div>
+        <div class="tier-feature">ទទួលបានវិញ្ញាបនបត្រឧបត្ថម្ភផ្លូវការពីក្រុមបាល់ទាត់ អាទរ។</div>
+        <div class="tier-feature">ដាក់ឡូហ្គោលើរាល់ឯកសារបោះពុម្ពផ្លូវការទាំងអស់។</div>
+        <div class="tier-feature" style="color:#cd7f32;font-weight:600;">✅ មិនកំណត់ចំនួនសមាជិក - បើកទទួលសម្រាប់គ្រប់អាជីវកម្ម!</div>
       </div>
     </div>
   </div>
